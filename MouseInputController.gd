@@ -25,7 +25,7 @@ func _input(event: InputEvent):
 
 			if cell == 0:
 				tilemap.set_cellv(tile_pos, 1)
-			elif cell == 1:
+			elif cell == 1 || cell == -1:
 				tilemap.set_cellv(tile_pos, 0)
 			#print("cell: ", cell)
 
