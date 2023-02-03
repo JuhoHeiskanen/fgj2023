@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Materials/floor.tres" type="Material" id=1]
+[ext_resource path="res://Prefabs/dungeons/door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/dungeons/connector.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/dungeon.gd" type="Script" id=5]
+[ext_resource path="res://Prefabs/dungeons/wall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Materials/ceiling.tres" type="Material" id=7]
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 14, 14 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 7, 0.1, 7 )
+
+[sub_resource type="PlaneMesh" id=3]
+material = ExtResource( 7 )
+size = Vector2( 14, 14 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 7, 0.1, 7 )
+
+[node name="Root" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705052, 0 )
+
+[node name="Floor" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ceiling" type="MeshInstance" parent="."]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0 )
+mesh = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Ceiling"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Ceiling/StaticBody"]
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Corner_wall" type="Spatial" parent="."]
+
+[node name="Wall" parent="Corner_wall" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+
+[node name="Wall2" parent="Corner_wall" instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+
+[node name="Corner_wall2" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+
+[node name="Wall" parent="Corner_wall2" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+
+[node name="Wall2" parent="Corner_wall2" instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+
+[node name="Corner_wall3" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="Wall" parent="Corner_wall3" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+
+[node name="Wall2" parent="Corner_wall3" instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+
+[node name="Corner_wall4" type="Spatial" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
+
+[node name="Wall" parent="Corner_wall4" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+
+[node name="Wall2" parent="Corner_wall4" instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+
+[node name="Connector_up" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.5 )
+visible = false
+
+[node name="Connector_down" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.5 )
+visible = false
+
+[node name="Connector_right" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.5, 0, 0 )
+visible = false
+
+[node name="Connector_left" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5, 0, 0 )
+visible = false
+
+[node name="Door_up" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )
+
+[node name="Door_down" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7 )
+
+[node name="Door_right" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 0 )
+
+[node name="Door_left" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, 0 )
