@@ -1,8 +1,10 @@
 extends Node2D
 
 enum TILE {NONE, L, I, T, X}
+enum ROTATION {ROT_0, ROT_90, ROT_180, ROT_270}
 
 var active_tile = TILE.I
+var tile_rotation = ROTATION.ROT_0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,10 +12,21 @@ func _ready():
 	
 
 func _input(event: InputEvent):
+	if event is InputEventKey and event.pressed:	
+		handle_button_press(event)
+
 	if event is InputEventMouseButton:
 		handle_left_click(event)
 		handle_mouse_scroll(event)
 
+func handle_button_press(event: InputEventKey):
+	# handle key presses
+	match event.scancode:
+		KEY_R:
+			rotate_tile()
+			
+
+	
 func handle_mouse_scroll(event: InputEventMouseButton):
 	var tilemap = $TileMap
 	if event.pressed && event.button_index == BUTTON_WHEEL_DOWN:
@@ -35,9 +48,9 @@ func handle_left_click(event: InputEventMouseButton):
 		print("Setting tile to: ", active_tile)
 		tilemap.set_cellv(tile_pos, active_tile)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func rotate_tile():
+	tile_rotation = (tile_rotation + 1)  % (ROTATION.ROT_270 + 1)
 
 func _on_ButtonI_pressed():
 	print("Pressed I tile button")
