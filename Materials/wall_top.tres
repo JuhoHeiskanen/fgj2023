@@ -4,4 +4,5 @@
 
 [resource]
 albedo_texture = ExtResource( 1 )
+uv1_offset = Vector3( 0, 0, 0.5 )
 uv1_triplanar = true
