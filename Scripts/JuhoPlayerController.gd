@@ -11,8 +11,11 @@ export var yaw: float = 0
 export var pitch: float = 0
 export var m_yaw: float = 0.022
 export var sensitivity: float = 1
+export var gravity: float = 9.81
+
 
 var eye_height: float
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,7 +27,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
-	
+
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -57,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	)
 	move = move.normalized().rotated(Vector3.UP, -yaw)
 	self.move_and_slide(move * walk_speed * delta, Vector3.UP)
-	
+
 	if Input.is_action_pressed("crouch"):
 		$Yaw.transform.origin.y = 0
 	else:

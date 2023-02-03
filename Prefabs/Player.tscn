@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/JuhoPlayerController.gd" type="Script" id=1]
+[ext_resource path="res://Resources/00014-797331429-expressive oil painting of a nft monkey.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleMesh" id=3]
 radius = 0.5
@@ -30,3 +31,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
 
 [node name="Camera" type="Camera" parent="Yaw/Pitch"]
 fov = 90.0
+
+[node name="Hud" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Hud"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_top = -512.0
+margin_right = 256.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource( 2 )
+stretch_mode = 1
