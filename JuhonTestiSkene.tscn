@@ -45,6 +45,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource( 3 )
+walk_speed = 300.0
 jump_force = 350.0
 
 [node name="MeshInstance" type="MeshInstance" parent="Player"]

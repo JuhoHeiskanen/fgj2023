@@ -4,7 +4,7 @@ extends RigidBody
 # var a: int = 2
 # var b: String = "text"
 
-export var speed: float = 30
+export var walk_speed: float = 30
 export var rotation_speed: float = 0.03
 export var jump_force: float = 30
 export var yaw: float = 0
@@ -12,14 +12,16 @@ export var pitch: float = 0
 export var m_yaw: float = 0.022
 export var sensitivity: float = 1
 
+var eye_height: float
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass  # Replace with function body.
+	eye_height = $Yaw.transform.origin.y
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 	
@@ -33,6 +35,10 @@ func _process(delta: float) -> void:
 	var vert_rotation = Input.get_action_strength("turn_up") - Input.get_action_strength("turn_down")
 	yaw += rotation * rotation_speed
 	pitch += vert_rotation * rotation_speed
+	if pitch > PI / 2:
+		pitch = PI / 2
+	if pitch < -PI / 2:
+		pitch = -PI / 2
 	$Yaw.rotation.y = -yaw
 	$Yaw/Pitch.rotation.x = pitch
 
@@ -50,6 +56,11 @@ func _physics_process(delta: float) -> void:
 		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	)
 	move = move.rotated(Vector3.UP, -yaw)
-	self.apply_central_impulse(move * speed)
+	self.apply_central_impulse(move * walk_speed * delta)
 	if Input.is_action_just_pressed("jump"):
 		self.apply_central_impulse(Vector3.UP * jump_force)
+		
+	if Input.is_action_pressed("crouch"):
+		$Yaw.transform.origin.y = 0
+	else:
+		$Yaw.transform.origin.y = eye_height
