@@ -1,4 +1,4 @@
-extends RigidBody
+extends KinematicBody
 
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -55,11 +55,9 @@ func _physics_process(delta: float) -> void:
 		0,
 		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	)
-	move = move.rotated(Vector3.UP, -yaw)
-	self.apply_central_impulse(move * walk_speed * delta)
-	if Input.is_action_just_pressed("jump"):
-		self.apply_central_impulse(Vector3.UP * jump_force)
-		
+	move = move.normalized().rotated(Vector3.UP, -yaw)
+	self.move_and_slide(move * walk_speed * delta, Vector3.UP)
+	
 	if Input.is_action_pressed("crouch"):
 		$Yaw.transform.origin.y = 0
 	else:
