@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/JuhoPlayerController.gd" type="Script" id=1]
-[ext_resource path="res://Resources/00014-797331429-expressive oil painting of a nft monkey.png" type="Texture" id=2]
+[ext_resource path="res://Resources/3d_sprites/hudlifebarbg.png" type="Texture" id=2]
+[ext_resource path="res://Resources/3d_sprites/hudfiller.png" type="Texture" id=3]
+[ext_resource path="res://Resources/3d_sprites/hudbogdanoff.png" type="Texture" id=4]
+[ext_resource path="res://Resources/3d_sprites/hudskull.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleMesh" id=3]
 radius = 0.5
@@ -31,23 +34,57 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
 [node name="Camera" type="Camera" parent="Yaw/Pitch"]
 fov = 90.0
 
-[node name="Hud" type="Control" parent="."]
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Hudfiller" type="TextureRect" parent="Hud"]
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -64.0
+grow_vertical = 0
+texture = ExtResource( 3 )
+stretch_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Hud"]
-visible = false
+[node name="CanvasLayer" type="CanvasLayer" parent="Hud"]
+layer = 2
+
+[node name="Hudlifebarbg" type="TextureRect" parent="Hud/CanvasLayer"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -256.0
-margin_top = -512.0
-margin_right = 256.0
+margin_left = -32.0
+margin_top = -64.0
+margin_right = 32.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource( 2 )
-stretch_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Hud/CanvasLayer"]
+layer = 3
+
+[node name="Hudbogdanoff" type="TextureRect" parent="Hud/CanvasLayer/CanvasLayer"]
+margin_left = 467.0
+margin_top = 405.0
+margin_right = 531.0
+margin_bottom = 469.0
+texture = ExtResource( 4 )
+
+[node name="Hudskull" type="TextureRect" parent="Hud/CanvasLayer/CanvasLayer"]
+margin_left = 593.0
+margin_top = 401.0
+margin_right = 657.0
+margin_bottom = 465.0
+texture = ExtResource( 5 )
+
+[node name="HpDisplay" type="TextureRect" parent="Hud/CanvasLayer/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 light_energy = 0.5
