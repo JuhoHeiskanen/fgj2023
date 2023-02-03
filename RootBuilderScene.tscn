@@ -24,26 +24,31 @@ margin_bottom = 44.0
 alignment = 1
 script = ExtResource( 3 )
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="ButtonL" type="Button" parent="HBoxContainer"]
 margin_left = 20.0
 margin_right = 39.0
 margin_bottom = 44.0
 text = "L"
 
-[node name="Button2" type="Button" parent="HBoxContainer"]
+[node name="ButtonI" type="Button" parent="HBoxContainer"]
 margin_left = 43.0
-margin_right = 63.0
+margin_right = 60.0
 margin_bottom = 44.0
-text = "X"
+text = "I"
 
-[node name="Button3" type="Button" parent="HBoxContainer"]
-margin_left = 67.0
-margin_right = 86.0
+[node name="ButtonT" type="Button" parent="HBoxContainer"]
+margin_left = 64.0
+margin_right = 83.0
 margin_bottom = 44.0
 text = "T"
 
-[node name="Button4" type="Button" parent="HBoxContainer"]
-margin_left = 90.0
+[node name="ButtonX" type="Button" parent="HBoxContainer"]
+margin_left = 87.0
 margin_right = 107.0
 margin_bottom = 44.0
-text = "I"
+text = "X"
+
+[connection signal="pressed" from="HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]
