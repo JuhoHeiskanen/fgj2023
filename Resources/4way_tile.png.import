@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Coarse_Dirt_(texture)_JE1_BE1.webp-8e5c28c1c8564829142717f0ebbfe8c9.stex"
+path="res://.import/4way_tile.png-7e3d0b79909a93fb24536b38b063e595.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Materials/Coarse_Dirt_(texture)_JE1_BE1.webp"
-dest_files=[ "res://.import/Coarse_Dirt_(texture)_JE1_BE1.webp-8e5c28c1c8564829142717f0ebbfe8c9.stex" ]
+source_file="res://Resources/4way_tile.png"
+dest_files=[ "res://.import/4way_tile.png-7e3d0b79909a93fb24536b38b063e595.stex" ]
 
 [params]
 
