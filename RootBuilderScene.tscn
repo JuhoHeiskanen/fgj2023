@@ -23,7 +23,7 @@ cell_y_sort = true
 show_collision = true
 centered_textures = true
 format = 1
-tile_data = PoolIntArray( 6, 4, 0, 65542, 4, 0, 131078, 4, 0, 196611, 2, 0, 196612, 2, 0, 196613, 2, 0, 196614, 4, 0, 196615, 2, 0, 196616, 2, 0, 196617, 2, 0, 196618, 1, 0, 458758, 1, 0 )
+tile_data = PoolIntArray( 65537, 0, 0, 65538, 8, 0, 65539, 11, 0, 65540, 12, 0 )
 script = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
