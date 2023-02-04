@@ -58,6 +58,8 @@ func _physics_process(delta: float) -> void:
 		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	)
 	move = move.normalized().rotated(Vector3.UP, -yaw)
+	if Input.is_action_pressed("sprint"):
+		move = move * 4
 	self.vel.x = move.x * walk_speed
 	self.vel.z = move.z * walk_speed
 	self.vel.y -= gravity * delta
