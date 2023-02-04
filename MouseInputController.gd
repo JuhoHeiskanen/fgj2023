@@ -27,17 +27,17 @@ func handle_button_press(event: InputEventKey):
 			rotate_tile()
 			
 func handle_mouse_scroll(event: InputEventMouseButton):
-	var tilemap = $TileMap
+	var container = $LevelContainer
 	if event.pressed && event.button_index == BUTTON_WHEEL_DOWN:
-		tilemap.position.y -= 16;
+		container.position.y -= 16;
 	if event.pressed && event.button_index == BUTTON_WHEEL_UP:
-		tilemap.position.y = min(tilemap.position.y + 16, 0);
+		container.position.y = min(container.position.y + 16, 256);
 
 func handle_left_click(event: InputEventMouseButton):
 	if event.pressed && event.button_index == BUTTON_LEFT:
 		var pos = event.position
 		#print("Mouse Click at: ", pos)
-		var tilemap = $TileMap
+		var tilemap = $LevelContainer/TileMap
 		var local_pos = tilemap.to_local(pos)
 		#print("Local pos: ", local_pos)
 		var tile_pos = tilemap.world_to_map(local_pos)
