@@ -7,7 +7,7 @@ extends KinematicBody
 
 export var direction: Vector3
 export var speed: float = 10.0
-export var attack_damage: float = 2
+export var attack_damage: float = 1
 export var bounces_left: int = 3
 # export var owner: Node
 

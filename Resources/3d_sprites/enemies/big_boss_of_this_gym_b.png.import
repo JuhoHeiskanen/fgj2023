@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/menemy2_r.png-981b79ac7d49c08dec77b7c11e7bb4b6.stex"
+path="res://.import/big_boss_of_this_gym_b.png-8b4bf963a26df5b3bb046863c5020404.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/3d_sprites/enemies/menemy2_r.png"
-dest_files=[ "res://.import/menemy2_r.png-981b79ac7d49c08dec77b7c11e7bb4b6.stex" ]
+source_file="res://Resources/3d_sprites/enemies/big_boss_of_this_gym_b.png"
+dest_files=[ "res://.import/big_boss_of_this_gym_b.png-8b4bf963a26df5b3bb046863c5020404.stex" ]
 
 [params]
 

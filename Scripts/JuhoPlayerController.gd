@@ -12,7 +12,7 @@ export var hp: int = 10
 export var max_hp: int = 10
 
 export var attack_delay = .5
-export var attack_damage = 1
+export var attack_damage = 2
 export var melee_distance = 2
 var attack_cooldown = 0.0
 

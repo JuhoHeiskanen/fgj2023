@@ -6,6 +6,7 @@ export var melee_range: float = 1.5
 export var melee_damage: int = 1
 export var melee_cooldown: float = 0.0
 export var melee_delay: float = 2.5
+export var attack_windup: float = 1.0
 var attack_timer: float = 0.0
 
 onready var player = $"../Player"
@@ -36,7 +37,7 @@ func _physics_process(delta):
 	elif melee_cooldown <= 0:
 		var diff_to_player: Vector3 = player.translation - self.translation
 		if diff_to_player.length_squared() <= melee_range * melee_range:
-			attack_timer = 1
+			attack_timer = attack_windup
 	else:
 		melee_cooldown -= delta
 
