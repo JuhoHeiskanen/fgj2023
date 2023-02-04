@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/TilePreview.gd" type="Script" id=7]
 [ext_resource path="res://Resources/3way_tile.png" type="Texture" id=8]
 [ext_resource path="res://Resources/gras_dec.png" type="Texture" id=9]
+[ext_resource path="res://Resources/shrooms/Shroom4Frames.tres" type="SpriteFrames" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -33,6 +34,12 @@ script = ExtResource( 2 )
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
+[node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
+position = Vector2( 581, -195 )
+frames = ExtResource( 10 )
+frame = 1
+playing = true
+
 [node name="BackgroundSprite" type="Sprite" parent="LevelContainer"]
 position = Vector2( 576, 1000 )
 texture = ExtResource( 4 )
@@ -40,10 +47,11 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1152, 2000 )
 
 [node name="Grass" type="Sprite" parent="LevelContainer"]
+position = Vector2( 39, -3 )
 texture = ExtResource( 9 )
 offset = Vector2( 540, -40 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 1080, 128 )
+region_rect = Rect2( 0, 0, 1152, 128 )
 
 [node name="TileMap" type="TileMap" parent="LevelContainer"]
 tile_set = ExtResource( 1 )

@@ -67,7 +67,7 @@ func handle_mouse_scroll(event: InputEventMouseButton):
 	if event.pressed && event.button_index == BUTTON_WHEEL_DOWN:
 		container.position.y -= 16;
 	if event.pressed && event.button_index == BUTTON_WHEEL_UP:
-		container.position.y = min(container.position.y + 16, 256);
+		container.position.y = min(container.position.y + 16, 384);
 
 func handle_left_click(event: InputEventMouseButton):
 	if event.pressed && event.button_index == BUTTON_LEFT:
