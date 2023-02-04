@@ -70,36 +70,44 @@ __meta__ = {
 
 [node name="Wall" parent="Corner_wall" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+visible = true
 
 [node name="Wall2" parent="Corner_wall" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+visible = true
 
 [node name="Corner_wall2" type="Spatial" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 
 [node name="Wall" parent="Corner_wall2" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+visible = true
 
 [node name="Wall2" parent="Corner_wall2" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+visible = true
 
 [node name="Corner_wall3" type="Spatial" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="Wall" parent="Corner_wall3" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+visible = true
 
 [node name="Wall2" parent="Corner_wall3" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+visible = true
 
 [node name="Corner_wall4" type="Spatial" parent="."]
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
 
 [node name="Wall" parent="Corner_wall4" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 4.5 )
+visible = true
 
 [node name="Wall2" parent="Corner_wall4" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.5, 0, 7 )
+visible = true
 
 [node name="Door_up" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )

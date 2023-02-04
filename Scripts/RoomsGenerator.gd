@@ -41,6 +41,8 @@ func initialize(grid):
 			var room = room_prefab.instance()
 			room.transform.origin.x = x * SIZE_X
 			room.transform.origin.z = z * SIZE_Z
+			var room_navmesh = room.get_node("NavMesh")
+
 			self.add_child(room)
 
 			var has_north = mask & 1 > 0
@@ -48,12 +50,26 @@ func initialize(grid):
 			var has_south = mask & 4 > 0
 			var has_west = mask & 8 > 0
 			if has_west:
-				room.toggle_exit(room.Direction.WEST)
+				room.open_exit(room.Direction.WEST)
+			else:
+				room.close_exit(room.Direction.WEST)
 			if has_east:
-				room.toggle_exit(room.Direction.EAST)
+				room.open_exit(room.Direction.EAST)
+			else:
+				room.close_exit(room.Direction.EAST)
 			if has_north:
-				room.toggle_exit(room.Direction.NORTH)
+				room.open_exit(room.Direction.NORTH)
+			else:
+				room.close_exit(room.Direction.NORTH)
 			if has_south:
-				room.toggle_exit(room.Direction.SOUTH)
+				room.open_exit(room.Direction.SOUTH)
+			else:
+				room.close_exit(room.Direction.SOUTH)
+			
+		
+			room_navmesh.transform.origin.x = x * SIZE_X
+			room_navmesh.transform.origin.z = z * SIZE_Z
+			room.remove_child(room_navmesh)
+			self.nav_mesh.add_child(room_navmesh)
 				
-	NavigationMeshGenerator.bake(nav_mesh.navmesh, self)
+	NavigationMeshGenerator.bake(nav_mesh.navmesh, self.nav_mesh)

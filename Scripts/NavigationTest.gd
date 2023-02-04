@@ -14,6 +14,7 @@ func _ready():
 	NavigationServer.set_active(true)
 
 func _physics_process(delta):
+	navigation.set_max_speed(speed)
 	navigation.set_target_location(player.translation)
 	var next_location = navigation.get_next_location()
 	var diff = next_location - self.translation
