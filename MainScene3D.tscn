@@ -4,7 +4,7 @@
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/FollowerMonster.tscn" type="PackedScene" id=3]
 
-[node name="Root" type="Spatial"]
+[node name="Root2" type="Spatial"]
 
 [node name="RoomsGenerator" parent="." instance=ExtResource( 1 )]
 
