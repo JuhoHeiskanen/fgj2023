@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Materials/floor.tres" type="Material" id=1]
 [ext_resource path="res://Prefabs/dungeons/door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/dungeons/connector.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/dungeon.gd" type="Script" id=5]
 [ext_resource path="res://Prefabs/dungeons/wall.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Materials/ceiling.tres" type="Material" id=7]
-[ext_resource path="res://Environments/void.tres" type="Environment" id=8]
 [ext_resource path="res://Prefabs/Torch.tscn" type="PackedScene" id=9]
 
 [sub_resource type="PlaneMesh" id=1]
@@ -26,9 +24,6 @@ extents = Vector3( 7, 0.1, 7 )
 
 [node name="Root" type="Spatial"]
 script = ExtResource( 5 )
-
-[node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705052, 0 )
 
 [node name="Floor" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
@@ -115,9 +110,6 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 0
 
 [node name="Door_left" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, 0 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 8 )
 
 [node name="Torch" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98073, 0.120306, -5.25144 )
