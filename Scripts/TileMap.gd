@@ -5,8 +5,8 @@ const RESOURCE_CALC = 2
 const RESOURCE_IRON = 3
 const RESOURCE_WATER = 4
 
-const GENERATION_RANGE_X = 15
-const GENERATION_RANGE_Y = 40
+const GENERATION_RANGE_X = 10
+const GENERATION_RANGE_Y = 15
 
 var RES_TEXTURE_WATER = load("res://Resources/3d_sprites/water.png")
 var RES_TEXTURE_IRON = load("res://Resources/3d_sprites/iron.png")
@@ -17,11 +17,12 @@ var resource_map = [];
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Initializing Tilemap")
+	randomize()
 
 	# Randomly generate resources
-	for _y in range(0, GENERATION_RANGE_X):
+	for _y in range(0, GENERATION_RANGE_Y):
 		var row = []
-		for _x in range(0, GENERATION_RANGE_Y):
+		for _x in range(0, GENERATION_RANGE_X):
 			var res = roll_resource()
 			row.append(res if _y > 1 else RESOURCE_NONE)
 		resource_map.append(row)
@@ -31,7 +32,7 @@ func _ready():
 func spawn_resource_sprites():
 	for y in resource_map.size():
 		var row = resource_map[y]
-		for x in row:
+		for x in row.size():
 			var res = row[x] 
 			if res == RESOURCE_NONE:
 				continue
