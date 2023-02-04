@@ -25,16 +25,24 @@ enum Direction {
 }
 
 
-func open_exit(dir):
+func open_exit(dir, connection):
 	match dir:
 		Direction.NORTH:
 			self.remove_child(door_north)
+			if (!connection):
+				connector_north.add_monster_wall()
 		Direction.SOUTH:
 			self.remove_child(door_south)
+			if (!connection):
+				connector_south.add_monster_wall()
 		Direction.EAST:
 			self.remove_child(door_east)
+			if (!connection):
+				connector_east.add_monster_wall()
 		Direction.WEST:
 			self.remove_child(door_west)
+			if (!connection):
+				connector_west.add_monster_wall()
 
 
 func close_exit(dir):

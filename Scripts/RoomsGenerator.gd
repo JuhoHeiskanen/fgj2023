@@ -15,9 +15,7 @@ const SIZE_Z = 24
 # N E S W
 
 var tiles = [
-	[[1, 2], [1, 12], [1, 4]],
-	[[1, 6], [1, 15], [1, 9]],
-	[[1, 1], [1, 3], [1, 8]],
+	[[1, 2], [1, 15]],
 ]
 
 
@@ -45,26 +43,34 @@ func initialize(grid):
 
 			self.add_child(room)
 
-			var has_north = mask & 1 > 0
-			var has_east = mask & 2 > 0
-			var has_south = mask & 4 > 0
-			var has_west = mask & 8 > 0
-			if has_west:
-				room.open_exit(room.Direction.WEST)
-			else:
-				room.close_exit(room.Direction.WEST)
-			if has_east:
-				room.open_exit(room.Direction.EAST)
-			else:
-				room.close_exit(room.Direction.EAST)
-			if has_north:
-				room.open_exit(room.Direction.NORTH)
+			var north_open = mask & 1 > 0
+			var east_open = mask & 2 > 0
+			var south_open = mask & 4 > 0
+			var west_open = mask & 8 > 0
+
+			var has_north = z > 0 && grid[z - 1][x][0]
+			var has_east = x + 1 < W && grid[z][x + 1][0]
+			var has_south = z + 1 < H && grid[z + 1][x][0]
+			var has_west = x > 0 && grid[z][x - 1][0]
+			
+			print(has_north, has_east, has_south, has_west)
+
+			if north_open:
+				room.open_exit(room.Direction.NORTH, has_north)
 			else:
 				room.close_exit(room.Direction.NORTH)
-			if has_south:
-				room.open_exit(room.Direction.SOUTH)
+			if east_open:
+				room.open_exit(room.Direction.EAST, has_east)
+			else:
+				room.close_exit(room.Direction.EAST)
+			if south_open:
+				room.open_exit(room.Direction.SOUTH, has_south)
 			else:
 				room.close_exit(room.Direction.SOUTH)
+			if west_open:
+				room.open_exit(room.Direction.WEST, has_west)
+			else:
+				room.close_exit(room.Direction.WEST)
 			
 		
 			room_navmesh.transform.origin.x = x * SIZE_X
