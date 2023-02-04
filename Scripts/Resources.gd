@@ -14,4 +14,5 @@ func add_iron(amount: float):
 	iron += amount
 	print_resources()
 func print_resources():
-	print("W: ", water, ", C: ", calcium, ", I: ", iron)
+	# print("W: ", water, ", C: ", calcium, ", I: ", iron)
+	pass
