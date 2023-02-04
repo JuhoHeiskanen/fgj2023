@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Resources/3way_tile.png" type="Texture" id=8]
 [ext_resource path="res://Resources/gras_dec.png" type="Texture" id=9]
 [ext_resource path="res://Resources/shrooms/Shroom4Frames.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://Resources/3d_sprites/hudfiller_pink.png" type="Texture" id=11]
+[ext_resource path="res://Resources/l_tile.png" type="Texture" id=12]
+[ext_resource path="res://Resources/4way_tile.png" type="Texture" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -28,6 +31,10 @@ animations = [ {
 "name": "default",
 "speed": 3.0
 } ]
+
+[sub_resource type="StreamTexture" id=4]
+flags = 4
+load_path = "res://.import/hetero_tile.png-dcf37eb6acf5b4600efac15e0231a236.stex"
 
 [node name="RootBuilderScene" type="Node2D"]
 script = ExtResource( 2 )
@@ -81,36 +88,47 @@ position = Vector2( -191, 94 )
 texture = ExtResource( 8 )
 script = ExtResource( 7 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Hudfiller" type="TextureRect" parent="Hud"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -64.0
+grow_vertical = 0
+texture = ExtResource( 11 )
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud/Hudfiller"]
 margin_right = 128.0
 margin_bottom = 44.0
+rect_scale = Vector2( 0.5, 0.5 )
 alignment = 1
 
-[node name="ButtonL" type="Button" parent="HBoxContainer"]
-margin_left = 20.0
-margin_right = 39.0
-margin_bottom = 44.0
-text = "L"
+[node name="ButtonI" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
+margin_right = 128.0
+margin_bottom = 128.0
+texture_normal = SubResource( 4 )
 
-[node name="ButtonI" type="Button" parent="HBoxContainer"]
-margin_left = 43.0
-margin_right = 60.0
-margin_bottom = 44.0
-text = "I"
+[node name="ButtonL" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
+margin_left = 132.0
+margin_right = 260.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 12 )
 
-[node name="ButtonT" type="Button" parent="HBoxContainer"]
-margin_left = 64.0
-margin_right = 83.0
-margin_bottom = 44.0
-text = "T"
+[node name="ButtonT" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
+margin_left = 264.0
+margin_right = 392.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 8 )
 
-[node name="ButtonX" type="Button" parent="HBoxContainer"]
-margin_left = 87.0
-margin_right = 107.0
-margin_bottom = 44.0
-text = "X"
+[node name="ButtonX" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
+margin_left = 396.0
+margin_right = 524.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 13 )
 
-[connection signal="pressed" from="HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
-[connection signal="pressed" from="HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
-[connection signal="pressed" from="HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
-[connection signal="pressed" from="HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]

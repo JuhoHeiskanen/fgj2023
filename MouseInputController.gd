@@ -59,6 +59,14 @@ func handle_mouse_move(event: InputEventMouseMotion):
 func handle_button_press(event: InputEventKey):
 	# handle key presses
 	match event.scancode:
+		KEY_1:
+			_on_ButtonI_pressed()
+		KEY_2:
+			_on_ButtonL_pressed()
+		KEY_3:
+			_on_ButtonT_pressed()
+		KEY_4:
+			_on_ButtonX_pressed()
 		KEY_R:
 			rotate_tile()
 
