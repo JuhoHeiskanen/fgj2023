@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/3d_sprites/torch_sheetanim.png" type="Texture" id=2]
 
@@ -30,9 +30,6 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[sub_resource type="CapsuleShape" id=7]
-radius = 0.2
-
 [node name="Torch" type="Spatial"]
 
 [node name="OmniLight" type="OmniLight" parent="."]
@@ -42,11 +39,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676397, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32627, 0 )
 billboard = 2
 frames = SubResource( 6 )
-frame = 1
+frame = 2
 playing = true
-
-[node name="StaticBody" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.250537, 0 )
-shape = SubResource( 7 )

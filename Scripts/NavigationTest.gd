@@ -1,19 +1,37 @@
 extends KinematicBody
 
 export var speed: float = 3
+export var hp: int = 2
+export var melee_range: float = 1.5
+export var melee_damage: int = 1
+export var melee_cooldown: float = 0.0
+export var melee_delay: float = 2.5
 
-onready var room_generator = $"../RoomsGenerator"
 onready var player = $"../Player"
 onready var navigation: NavigationAgent = $"NavigationAgent"
 onready var sprite = $"MonsterSprite"
 
 var path = []
 
+func hurt(damage: int):
+	self.hp -= damage
+	if hp <= 0:
+		self.get_parent().remove_child(self)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	NavigationServer.set_active(true)
 
 func _physics_process(delta):
+	if melee_cooldown <= 0:
+		var diff_to_player: Vector3 = player.translation - self.translation
+		if diff_to_player.length_squared() <= melee_range * melee_range:
+			melee_cooldown = melee_delay
+			player.hurt(self.melee_damage)
+	else:
+		melee_cooldown -= delta
+
+	navigation.set_max_speed(speed)
 	navigation.set_target_location(player.translation)
 	var next_location = navigation.get_next_location()
 	var diff = next_location - self.translation
@@ -21,7 +39,3 @@ func _physics_process(delta):
 	
 	self.sprite.angle = -atan2(diff.z, diff.x) + PI
 	self.move_and_slide(diff, Vector3.UP)
-
-func _on_Timer_timeout():
-	#navigation.set_target_location(player.translation)
-	pass

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/projectile.png-11b44e2221b1996bc066740ff254e41c.s3tc.stex"
-path.etc2="res://.import/projectile.png-11b44e2221b1996bc066740ff254e41c.etc2.stex"
+path.s3tc="res://.import/wall_monster.png-c5b514c40a3a59d5a6ad48eacbf859a4.s3tc.stex"
+path.etc2="res://.import/wall_monster.png-c5b514c40a3a59d5a6ad48eacbf859a4.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Resources/3d_sprites/projectile.png"
-dest_files=[ "res://.import/projectile.png-11b44e2221b1996bc066740ff254e41c.s3tc.stex", "res://.import/projectile.png-11b44e2221b1996bc066740ff254e41c.etc2.stex" ]
+source_file="res://Resources/3d_sprites/wall_monster.png"
+dest_files=[ "res://.import/wall_monster.png-c5b514c40a3a59d5a6ad48eacbf859a4.s3tc.stex", "res://.import/wall_monster.png-c5b514c40a3a59d5a6ad48eacbf859a4.etc2.stex" ]
 
 [params]
 

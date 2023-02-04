@@ -15,10 +15,10 @@ const SIZE_Z = 24
 # N E S W
 
 var tiles = [
-	[[1, 2], [1, 12], [1, 4]],
-	[[1, 6], [1, 15], [1, 9]],
-	[[1, 1], [1, 3], [1, 8]],
+	[[1, 2], [1, 15]],
 ]
+
+var monster_spawns = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,19 +40,45 @@ func initialize(grid):
 			var room = room_prefab.instance()
 			room.transform.origin.x = x * SIZE_X
 			room.transform.origin.z = z * SIZE_Z
+			var room_navmesh = room.get_node("NavMesh")
+
 			self.add_child(room)
 
-			var has_north = mask & 1 > 0
-			var has_east = mask & 2 > 0
-			var has_south = mask & 4 > 0
-			var has_west = mask & 8 > 0
-			if has_west:
-				room.toggle_exit(room.Direction.WEST)
-			if has_east:
-				room.toggle_exit(room.Direction.EAST)
-			if has_north:
-				room.toggle_exit(room.Direction.NORTH)
-			if has_south:
-				room.toggle_exit(room.Direction.SOUTH)
+			var north_open = mask & 1 > 0
+			var east_open = mask & 2 > 0
+			var south_open = mask & 4 > 0
+			var west_open = mask & 8 > 0
+
+			var has_north = z > 0 && grid[z - 1][x][0]
+			var has_east = x + 1 < W && grid[z][x + 1][0]
+			var has_south = z + 1 < H && grid[z + 1][x][0]
+			var has_west = x > 0 && grid[z][x - 1][0]
+
+			if north_open:
+				room.open_exit(room.Direction.NORTH, has_north)
+			else:
+				room.close_exit(room.Direction.NORTH)
+			if east_open:
+				room.open_exit(room.Direction.EAST, has_east)
+			else:
+				room.close_exit(room.Direction.EAST)
+			if south_open:
+				room.open_exit(room.Direction.SOUTH, has_south)
+			else:
+				room.close_exit(room.Direction.SOUTH)
+			if west_open:
+				room.open_exit(room.Direction.WEST, has_west)
+			else:
+				room.close_exit(room.Direction.WEST)
+			
+			monster_spawns.append_array(room.get_monster_spawns())
+		
+			room_navmesh.transform.origin.x = x * SIZE_X
+			room_navmesh.transform.origin.z = z * SIZE_Z
+			room.remove_child(room_navmesh)
+			self.nav_mesh.add_child(room_navmesh)
 				
-	NavigationMeshGenerator.bake(nav_mesh.navmesh, self)
+	NavigationMeshGenerator.bake(nav_mesh.navmesh, self.nav_mesh)
+
+func get_monster_spawns():
+	return monster_spawns

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Materials/floor.tres" type="Material" id=1]
 [ext_resource path="res://Prefabs/dungeons/wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Materials/ceiling.tres" type="Material" id=3]
+[ext_resource path="res://Scripts/Connector.gd" type="Script" id=7]
 
 [sub_resource type="PlaneMesh" id=1]
 material = ExtResource( 1 )
@@ -19,11 +20,13 @@ size = Vector2( 4, 5 )
 extents = Vector3( 2, 0.1, 2.5 )
 
 [node name="Connector" type="Spatial"]
+script = ExtResource( 7 )
 
 [node name="Floor" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="Floor"]
+collision_layer = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
 shape = SubResource( 2 )
@@ -39,6 +42,7 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0
 mesh = SubResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="Ceiling"]
+collision_layer = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Ceiling/StaticBody"]
 shape = SubResource( 4 )

@@ -4,6 +4,7 @@
 [ext_resource path="res://Environments/void.tres" type="Environment" id=3]
 
 [sub_resource type="NavigationMesh" id=1]
+agent_radius = 1.0
 
 [node name="RoomsGenerator" type="Spatial"]
 script = ExtResource( 1 )

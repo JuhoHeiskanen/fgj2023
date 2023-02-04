@@ -6,7 +6,7 @@
 [ext_resource path="res://Resources/apua/left.png" type="Texture" id=4]
 [ext_resource path="res://Resources/apua/front.png" type="Texture" id=5]
 
-[sub_resource type="ImageTexture" id=1]
+[sub_resource type="ImageTexture" id=2]
 size = Vector2( 96, 96 )
 
 [node name="MonsterSprite" type="Sprite3D"]
@@ -14,7 +14,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 billboard = 2
 shaded = true
 double_sided = false
-texture = SubResource( 1 )
+texture = SubResource( 2 )
 script = ExtResource( 1 )
 front = ExtResource( 5 )
 back = ExtResource( 3 )

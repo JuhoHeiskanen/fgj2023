@@ -12,15 +12,37 @@ export var pitch: float = 0
 export var m_yaw: float = 0.022
 export var sensitivity: float = 1
 export var gravity: float = 9.81
+export var hp: int = 10
+export var max_hp: int = 10
 
+export var attack_delay = .5
+export var attack_damage = 1
+export var melee_distance = 2
+var attack_cooldown = 0.0
+
+onready var attack_animation = $Hud/Center/Attack1
+onready var hurt_animation = $Hud/CanvasLayer/CanvasLayer/Center/Attack1
+
+const fireball_scene: PackedScene = preload("res:///Prefabs/Fireball.tscn")
 
 var eye_height: float
 var vel = Vector3()
+
+func hurt(damage: int):
+	hp -= damage
+	self.hurt_animation.frame = 0
+	self.hurt_animation.play()
+	self.update_hp_display()
+
+func update_hp_display():
+	var hp_ratio = float(hp) / float(max_hp) / 2 + 0.25
+	$Hud/CanvasLayer/CanvasLayer/HpDisplayBase.color.a = hp_ratio
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	eye_height = $Yaw.transform.origin.y
+	update_hp_display()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,6 +55,7 @@ func _process(_delta: float) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 	var rotation = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 	var vert_rotation = Input.get_action_strength("turn_up") - Input.get_action_strength("turn_down")
@@ -51,7 +74,32 @@ func _input(event):
 		yaw += event.relative.x * m_yaw * sensitivity * .1
 		pitch += -event.relative.y * m_yaw * sensitivity * .1
 
+func punch():
+	self.attack_cooldown = self.attack_delay
+	self.attack_animation.frame = 0
+	self.attack_animation.play()
+
+	var space_state = get_world().direct_space_state
+	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
+	if result && result.collider:
+		if result.collider.has_method("hurt"):
+			result.collider.hurt(self.attack_damage)
+
+
+func fireball():
+	self.attack_cooldown = self.attack_delay
+	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+	var projectile = fireball_scene.instance()
+	projectile.transform = self.transform
+	projectile.direction = look
+	self.get_parent().add_child(projectile)
+
+
 func _physics_process(delta: float) -> void:
+	if self.attack_cooldown > 0:
+		self.attack_cooldown -= delta
+
 	var move = Vector3(
 		Input.get_action_strength("strafe_right") - Input.get_action_strength("strafe_left"),
 		0,
@@ -66,6 +114,13 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump"):
 		self.vel.y = jump_force
+
+	if Input.is_action_pressed("attack") && attack_cooldown <= 0.0:
+		self.punch()
+
+	if Input.is_action_pressed("attack2") && attack_cooldown <= 0.0:
+		self.fireball()
+
 
 	self.vel = self.move_and_slide(self.vel, Vector3.UP, true)
 
