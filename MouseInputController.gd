@@ -1,9 +1,10 @@
 extends Node2D
 
-enum TILE {NONE, L, I, T, X}
+enum TILE {I, L, T, X}
+const TILE_INDEX_OFFSET = 4 
 enum ROTATION {ROT_0, ROT_90, ROT_180, ROT_270}
 
-var active_tile = TILE.NONE
+var active_tile = TILE.I
 var tile_rotation = ROTATION.ROT_0;
 
 # Called when the node enters the scene tree for the first time.
@@ -41,34 +42,24 @@ func handle_left_click(event: InputEventMouseButton):
 		#print("Local pos: ", local_pos)
 		var tile_pos = tilemap.world_to_map(local_pos)
 		#print("Tile pos: ", tile_pos)
-		#var cell = tilemap.get_cellv(tile_pos)
-
-		print("Setting tile to: ", active_tile)
-		# TODO: This fucking shit doesn't work lmao
-		# Fix later maybe
-		tilemap.set_cellv(
-			tile_pos,
-			active_tile,
-			tile_rotation == ROTATION.ROT_90 || tile_rotation == ROTATION.ROT_270, # FlipX
-			tile_rotation == ROTATION.ROT_180, # FlipY
-			tile_rotation == ROTATION.ROT_90 || tile_rotation == ROTATION.ROT_270 # Transpose
-			)
+		#print("Setting tile to: ", active_tile)
+		tilemap.set_cellv(tile_pos, active_tile + tile_rotation)
 
 func rotate_tile():
 	tile_rotation = (tile_rotation + 1)  % (ROTATION.ROT_270 + 1)
 
 func _on_ButtonI_pressed():
 	print("Pressed I tile button")
-	active_tile = TILE.I
+	active_tile = TILE.I * TILE_INDEX_OFFSET
 
 func _on_ButtonT_pressed():
 	print("Pressed T tile button")
-	active_tile = TILE.T
+	active_tile = TILE.T * TILE_INDEX_OFFSET
 
 func _on_ButtonL_pressed():
 	print("Pressed L tile button")
-	active_tile = TILE.L
+	active_tile = TILE.L * TILE_INDEX_OFFSET
 
 func _on_ButtonX_pressed():
 	print("Pressed X tile button")
-	active_tile = TILE.X
+	active_tile = TILE.X * TILE_INDEX_OFFSET

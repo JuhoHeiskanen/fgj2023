@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/inverted_dirt.webp-6af356283b0249b1689a59a64569aa89.stex"
+path="res://.import/l_tile_270.png-a717673cc0df987ef9a496c9a92de828.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/inverted_dirt.webp"
-dest_files=[ "res://.import/inverted_dirt.webp-6af356283b0249b1689a59a64569aa89.stex" ]
+source_file="res://Resources/l_tile_270.png"
+dest_files=[ "res://.import/l_tile_270.png-a717673cc0df987ef9a496c9a92de828.stex" ]
 
 [params]
 
