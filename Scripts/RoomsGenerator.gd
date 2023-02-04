@@ -2,6 +2,8 @@ extends Spatial
 
 const room_prefab: PackedScene = preload("res:///Prefabs/dungeons/dungeon.tscn")
 
+onready var nav_mesh = $NavMesh
+
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
@@ -31,10 +33,12 @@ func _ready() -> void:
 			var mask = tile[1]
 			if type == 0:
 				continue
+
 			var room = room_prefab.instance()
 			room.transform.origin.x = x * SIZE_X
 			room.transform.origin.z = z * SIZE_Z
 			self.add_child(room)
+
 			var has_north = mask & 1 > 0
 			var has_east = mask & 2 > 0
 			var has_south = mask & 4 > 0
@@ -47,7 +51,5 @@ func _ready() -> void:
 				room.toggle_exit(room.Direction.NORTH)
 			if has_south:
 				room.toggle_exit(room.Direction.SOUTH)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+				
+	NavigationMeshGenerator.bake(nav_mesh.navmesh, self)
