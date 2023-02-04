@@ -80,16 +80,65 @@ func place_cell(tile_pos: Vector2):
 	if cell != -1:
 		return
 
-	# This should give us 4 of the surrounding cells: above, right, under, left
-	var surrounding_cells = []
+	# This should go through the 4 surrounding cells: above, right, under, left
+	var valid = false
+	#var surrounding_cells = []
+	var newtile_bitmask = get_rotated_tile_bitmap(int(active_tile / Globals.TILE_INDEX_OFFSET), tile_rotation)
+
+	print("New tile bitmask: ", newtile_bitmask)
+
+	# Check cells to right and left
 	for x in [-1, 1]:
-		for y in [-1, 1]:
-			var c = tilemap.get_cell(tile_pos.x + x, tile_pos.y + y)
-			surrounding_cells.append(c)
+		var c = tilemap.get_cell(tile_pos.x + x, tile_pos.y)
+		if c == -1:
+			continue
 
-	tilemap.set_cellv(tile_pos, active_tile + tile_rotation)
+		var r = c % 4
 
-	
+		var target_bitmask = get_rotated_tile_bitmap(int(c / Globals.TILE_INDEX_OFFSET), r)
+		print("X offset: ", x, ", Target bitmask: ", target_bitmask)
+
+		# Check connection to the RIGHT
+		if x > 0 && (newtile_bitmask & Globals.FLAG_EAST) != 0 && (target_bitmask & Globals.FLAG_WEST) != 0:
+			print("Valid connection to the RIGHT")
+			valid = true
+			break
+		# Check connection to the left
+		elif x < 0 && (newtile_bitmask & Globals.FLAG_WEST) != 0 && (target_bitmask & Globals.FLAG_EAST) != 0:
+			valid = true
+			print("Valid connection to the LEFT")
+			break
+
+	# Check cells above and below
+	for y in [-1, 1]:
+		var c = tilemap.get_cell(tile_pos.x, tile_pos.y + y)
+		if c == -1:
+			continue
+
+		var r = c % 4
+
+		var target_bitmask = get_rotated_tile_bitmap(int(c / Globals.TILE_INDEX_OFFSET), r)
+		print("Y offset: ", y, ", Target bitmask: ", target_bitmask)
+
+		# Check connection above
+		if y < 0 && (newtile_bitmask & Globals.FLAG_NORTH) != 0 && (target_bitmask & Globals.FLAG_SOUTH) != 0:
+			print("Valid connection to the UP")
+			valid = true
+			break
+		# Check connection below
+		elif y > 0 && (newtile_bitmask & Globals.FLAG_SOUTH) != 0 && (target_bitmask & Globals.FLAG_NORTH) != 0:
+			print("Valid connection to the DOWN")
+			valid = true
+			break
+
+	if valid:
+		tilemap.set_cellv(tile_pos, active_tile + tile_rotation)
+
+
+func get_rotated_tile_bitmap(tile: int, rot: int):
+	var base_bitmask = [Globals.BITMASK_I, Globals.BITMASK_L, Globals.BITMASK_T, Globals.BITMASK_X][tile]
+	var rotated_bitmask = ((base_bitmask << rot) | (base_bitmask >> (4 - rot))) & 0b1111
+	return rotated_bitmask
 
 func rotate_tile():
 	tile_rotation = (tile_rotation + 1)  % (ROTATION.ROT_270 + 1)
