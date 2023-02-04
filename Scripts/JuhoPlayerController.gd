@@ -80,7 +80,7 @@ func punch():
 	self.attack_animation.play()
 
 	var space_state = get_world().direct_space_state
-	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, -pitch)
 	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
 	if result && result.collider:
 		if result.collider.has_method("hurt"):
@@ -89,7 +89,7 @@ func punch():
 
 func fireball():
 	self.attack_cooldown = self.attack_delay
-	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, -pitch)
 	var projectile = fireball_scene.instance()
 	projectile.transform = self.transform
 	projectile.direction = look
