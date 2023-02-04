@@ -13,6 +13,10 @@ export var m_yaw: float = 0.022
 export var sensitivity: float = 1
 export var gravity: float = 9.81
 
+export var attack_delay = .5
+var attack_cooldown = 0.0
+
+onready var attack_animation = $Hud/Center/Attack1
 
 var eye_height: float
 var vel = Vector3()
@@ -50,8 +54,19 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		yaw += event.relative.x * m_yaw * sensitivity * .1
 		pitch += -event.relative.y * m_yaw * sensitivity * .1
+		
+func punch():
+	self.attack_cooldown = self.attack_delay
+	self.attack_animation.frame = 0
+	self.attack_animation.play()
+		
+func fireball():
+	self.attack_cooldown = self.attack_delay
 
 func _physics_process(delta: float) -> void:
+	if self.attack_cooldown > 0:
+		self.attack_cooldown -= delta
+
 	var move = Vector3(
 		Input.get_action_strength("strafe_right") - Input.get_action_strength("strafe_left"),
 		0,
@@ -66,6 +81,13 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump"):
 		self.vel.y = jump_force
+		
+	if Input.is_action_pressed("attack") && attack_cooldown <= 0.0:
+		self.punch()
+
+	if Input.is_action_pressed("attack2") && attack_cooldown <= 0.0:
+		self.fireball()
+	
 
 	self.vel = self.move_and_slide(self.vel, Vector3.UP, true)
 

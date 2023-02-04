@@ -2,7 +2,6 @@ extends KinematicBody
 
 export var speed: float = 3
 
-onready var room_generator = $"../RoomsGenerator"
 onready var player = $"../Player"
 onready var navigation: NavigationAgent = $"NavigationAgent"
 onready var sprite = $"MonsterSprite"

@@ -42,7 +42,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676397, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32627, 0 )
 billboard = 2
 frames = SubResource( 6 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="StaticBody" type="StaticBody" parent="."]
