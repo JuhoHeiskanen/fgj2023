@@ -21,11 +21,11 @@ func _input(event: InputEvent):
 		var current_scene = root.get_child(root.get_child_count() - 1)
 		current_scene.queue_free()
 
-		var scene = load("res://Prefabs/RoomsGenerator.tscn")
+		var scene = load("res://MainScene3D.tscn")
 		var instance = scene.instance();
 		print("Loaded scene: ", instance)
 
-		instance.tiles = data
+		instance.get_node("RoomsGenerator").tiles = data
 		
 		root.add_child(instance)
 		get_tree().set_current_scene(instance)
@@ -57,7 +57,7 @@ func serialize_tilemap():
 			var initial_bitmask = [BITMASK_I, BITMASK_L, BITMASK_T, BITMASK_X][cell_type]
 
 			var bitmask = ((initial_bitmask << rotation) | (initial_bitmask >> (4 - rotation))) & 0b1111
-			var data = [cell_type , bitmask]
+			var data = [1 , bitmask]
 			row.append(data)
 		output.append(row)
 
