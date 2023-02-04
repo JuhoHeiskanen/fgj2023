@@ -23,6 +23,8 @@ onready var buttonX: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonX
 onready var referenceWidth = get_viewport_rect().size[0]
 onready var referenceHeight = get_viewport_rect().size[1]
 
+signal start_3d_scene
+
 func on_resize():
 	var viewport_size = get_viewport_rect().size
 	var scaleX = viewport_size[0] / referenceWidth
@@ -37,6 +39,11 @@ func _ready():
 
 
 func _input(event: InputEvent):
+	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
+		var data = tilemap.serialize_tilemap()
+		emit_signal("start_3d_scene", data)
+		return
+
 	if event is InputEventKey and event.pressed:
 		handle_button_press(event)
 

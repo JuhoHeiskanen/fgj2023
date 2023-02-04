@@ -25,6 +25,10 @@ var eye_height: float
 var vel = Vector3()
 var dead = false
 
+var start_position = Vector3()
+
+signal back_to_builder
+
 func hurt(damage: int):
 	hp -= damage
 	self.hurt_animation.frame = 0
@@ -39,6 +43,11 @@ func hurt(damage: int):
 func update_hp_display():
 	var hp_ratio = float(hp) / float(max_hp) / 2 + 0.25
 	$Hud/CanvasLayer/CanvasLayer/HpDisplayBase.color.a = hp_ratio
+	
+func set_start_position(vec):
+	start_position = vec
+	transform.origin = vec
+	yaw = PI
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -122,6 +131,9 @@ func _physics_process(delta: float) -> void:
 		self.vel.y = jump_force
 
 	if Input.is_action_pressed("attack") && attack_cooldown <= 0.0:
+		if self.translation.distance_to(self.start_position) < 1:
+			emit_signal("back_to_builder")
+			return
 		self.punch()
 
 	if Input.is_action_pressed("attack2") && attack_cooldown <= 0.0:

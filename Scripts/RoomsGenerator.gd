@@ -87,8 +87,10 @@ func initialize(grid):
 
 	NavigationMeshGenerator.bake(nav_mesh.navmesh, self.nav_mesh)
 
-	player.transform.origin = Vector3((4-offset_x) * SIZE_X, 1, (0-offset_z) * SIZE_Z - SIZE_Z/2 + 2)
-	player.yaw = PI
+	player.set_start_position(Vector3((4-offset_x) * SIZE_X, 1, (0-offset_z) * SIZE_Z - SIZE_Z/2 + 2))
 
 func get_monster_spawns():
 	return monster_spawns
+	
+func clear_navmesh():
+	NavigationMeshGenerator.clear(nav_mesh.navmesh)
