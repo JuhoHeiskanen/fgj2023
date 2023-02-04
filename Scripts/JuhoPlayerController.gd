@@ -1,9 +1,5 @@
 extends KinematicBody
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
-
 export var walk_speed: float = 5
 export var rotation_speed: float = 0.03
 export var jump_force: float = 30
@@ -80,7 +76,7 @@ func punch():
 	self.attack_animation.play()
 
 	var space_state = get_world().direct_space_state
-	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, -pitch)
+	var look = Vector3.FORWARD.rotated(Vector3.LEFT, -pitch).rotated(Vector3.UP, -yaw)
 	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
 	if result && result.collider:
 		if result.collider.has_method("hurt"):
@@ -89,9 +85,9 @@ func punch():
 
 func fireball():
 	self.attack_cooldown = self.attack_delay
-	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, -pitch)
+	var look = Vector3.FORWARD.rotated(Vector3.LEFT, -pitch).rotated(Vector3.UP, -yaw)
 	var projectile = fireball_scene.instance()
-	projectile.transform = self.transform
+	projectile.translation = self.translation + $Yaw.translation
 	projectile.direction = look
 	self.get_parent().add_child(projectile)
 
