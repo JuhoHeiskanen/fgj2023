@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Materials/floor.tres" type="Material" id=1]
 [ext_resource path="res://Resources/coolman_eyesbleed.png" type="Texture" id=2]
@@ -8,7 +8,10 @@
 [ext_resource path="res://Prefabs/Torch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Environments/void.tres" type="Environment" id=7]
 [ext_resource path="res://Prefabs/MonsterSprite.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Resources/3d_sprites/menemy_4sheet.png" type="Texture" id=9]
+[ext_resource path="res://Resources/3d_sprites/enemies/menemy1_l.png" type="Texture" id=9]
+[ext_resource path="res://Resources/3d_sprites/enemies/menemy1_b.png" type="Texture" id=10]
+[ext_resource path="res://Resources/3d_sprites/enemies/menemy1_r.png" type="Texture" id=11]
+[ext_resource path="res://Resources/3d_sprites/enemies/menemy1_f.png" type="Texture" id=12]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 24, 2, 24 )
@@ -45,11 +48,6 @@ albedo_texture = ExtResource( 2 )
 flags_transparent = true
 params_billboard_mode = 2
 albedo_texture = ExtResource( 5 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 64, 64 )
 
 [node name="JuhonTestiSkene" type="Spatial"]
 
@@ -164,4 +162,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51503, 3.03089, -6.44445 )
 
 [node name="MonsterSprite" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97707, -1.46905 )
-front = SubResource( 14 )
+front = ExtResource( 12 )
+back = ExtResource( 10 )
+right = ExtResource( 11 )
+left = ExtResource( 9 )

@@ -24,7 +24,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var rot = angle - PI / 4
 	if yaw:
-		rot += yaw.rotation.y
+		rot -= yaw.rotation.y
 	rot = fmod(rot, 2 * PI)
 	if rot < 0:
 		rot += 2 * PI
