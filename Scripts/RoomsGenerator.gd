@@ -3,6 +3,7 @@ extends Spatial
 const room_prefab: PackedScene = preload("res:///Prefabs/dungeons/dungeon.tscn")
 
 onready var nav_mesh = $NavMesh
+onready var player = $"../Player"
 
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -17,6 +18,8 @@ const SIZE_Z = 24
 var tiles = [
 	[[1, 2], [1, 15]],
 ]
+var offset_x: int = 0
+var offset_z: int = 0
 
 var monster_spawns = []
 
@@ -43,7 +46,7 @@ func initialize(grid):
 			var room_navmesh = room.get_node("NavMesh")
 			self.add_child(room)
 			
-			if z == 0 and x == 0:
+			if z == 0-offset_z and x == 4-offset_x:
 				room.add_exit_door()
 
 			var north_open = mask & 1 > 0
@@ -81,6 +84,9 @@ func initialize(grid):
 			self.nav_mesh.add_child(room_navmesh)
 				
 	NavigationMeshGenerator.bake(nav_mesh.navmesh, self.nav_mesh)
+	
+	player.transform.origin = Vector3((4-offset_x) * SIZE_X, 1, (0-offset_z) * SIZE_Z - SIZE_Z/2 + 2)
+	player.yaw = PI
 
 func get_monster_spawns():
 	return monster_spawns
