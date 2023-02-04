@@ -103,6 +103,57 @@ margin_right = 107.0
 margin_bottom = 44.0
 text = "X"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enable = true
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 1022.0
+margin_bottom = 599.0
+
+[node name="LevelContainer" type="Node2D" parent="CanvasLayer/Control"]
+
+[node name="BackgroundSprite" type="Sprite" parent="CanvasLayer/Control/LevelContainer"]
+position = Vector2( 540, 1000 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Grass" type="Sprite" parent="CanvasLayer/Control/LevelContainer"]
+texture = ExtResource( 9 )
+offset = Vector2( 540, -40 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 128 )
+
+[node name="TileMap" type="TileMap" parent="CanvasLayer/Control/LevelContainer"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 128
+cell_y_sort = true
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( 4, 12, 0 )
+script = ExtResource( 3 )
+
+[node name="Birb" type="AnimatedSprite" parent="CanvasLayer/Control/LevelContainer"]
+position = Vector2( -323, -150 )
+frames = SubResource( 3 )
+playing = true
+offset = Vector2( 464, 19 )
+flip_h = true
+
+[node name="Birb2" type="AnimatedSprite" parent="CanvasLayer/Control/LevelContainer"]
+position = Vector2( 427, -151 )
+frames = SubResource( 3 )
+playing = true
+offset = Vector2( 464, 19 )
+
+[node name="TilePreview" type="Sprite" parent="CanvasLayer/Control/LevelContainer"]
+modulate = Color( 1, 1, 1, 0.7 )
+position = Vector2( -191, 94 )
+texture = ExtResource( 8 )
+script = ExtResource( 7 )
+
 [connection signal="pressed" from="HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
