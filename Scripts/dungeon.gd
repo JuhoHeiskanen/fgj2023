@@ -24,6 +24,18 @@ enum Direction {
 	WEST
 }
 
+func get_monster_spawns():
+	var spawns = []
+	if (connector_north.has_monster_wall()):
+		spawns.append(connector_north.get_global_position())
+	if (connector_east.has_monster_wall()):
+		spawns.append(connector_east.get_global_position())
+	if (connector_south.has_monster_wall()):
+		spawns.append(connector_south.get_global_position())
+	if (connector_west.has_monster_wall()):
+		spawns.append(connector_west.get_global_position())
+		
+	return spawns
 
 func open_exit(dir, connection):
 	match dir:

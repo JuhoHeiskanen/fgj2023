@@ -21,9 +21,6 @@ path_desired_distance = 0.5
 target_desired_distance = 0.5
 path_max_distance = 0.5
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -2.98023e-08 )
 shape = SubResource( 1 )
@@ -35,5 +32,3 @@ front = ExtResource( 7 )
 back = ExtResource( 5 )
 right = ExtResource( 6 )
 left = ExtResource( 2 )
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

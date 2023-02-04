@@ -27,7 +27,3 @@ func _physics_process(delta):
 	
 	self.sprite.angle = -atan2(diff.z, diff.x) + PI
 	self.move_and_slide(diff, Vector3.UP)
-
-func _on_Timer_timeout():
-	#navigation.set_target_location(player.translation)
-	pass

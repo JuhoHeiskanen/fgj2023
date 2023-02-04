@@ -18,6 +18,7 @@ var tiles = [
 	[[1, 2], [1, 15]],
 ]
 
+var monster_spawns = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,8 +53,6 @@ func initialize(grid):
 			var has_east = x + 1 < W && grid[z][x + 1][0]
 			var has_south = z + 1 < H && grid[z + 1][x][0]
 			var has_west = x > 0 && grid[z][x - 1][0]
-			
-			print(has_north, has_east, has_south, has_west)
 
 			if north_open:
 				room.open_exit(room.Direction.NORTH, has_north)
@@ -72,6 +71,7 @@ func initialize(grid):
 			else:
 				room.close_exit(room.Direction.WEST)
 			
+			monster_spawns.append_array(room.get_monster_spawns())
 		
 			room_navmesh.transform.origin.x = x * SIZE_X
 			room_navmesh.transform.origin.z = z * SIZE_Z
@@ -79,3 +79,6 @@ func initialize(grid):
 			self.nav_mesh.add_child(room_navmesh)
 				
 	NavigationMeshGenerator.bake(nav_mesh.navmesh, self.nav_mesh)
+
+func get_monster_spawns():
+	return monster_spawns
