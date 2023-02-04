@@ -16,6 +16,9 @@ export var attack_damage = 2
 export var melee_distance = 2
 var attack_cooldown = 0.0
 
+var walk_cooldown = 0.0
+export var walk_delay = .4
+
 onready var attack_animation = $Hud/Center/Attack1
 onready var hurt_animation = $Hud/CanvasLayer/CanvasLayer/Center/Attack1
 
@@ -122,7 +125,15 @@ func _physics_process(delta: float) -> void:
 		0,
 		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	)
+	if move.length_squared() > 0.1:
+		self.walk_cooldown -= delta
+		if self.walk_cooldown <= 0:
+			$Walk.stream.loop = false
+			$Walk.pitch_scale = rand_range(0.8, 1.2)
+			$Walk.play()
+			self.walk_cooldown += self.walk_delay
 	move = move.normalized().rotated(Vector3.UP, -yaw)
+	
 	if Input.is_action_pressed("sprint"):
 		move = move * 4
 	self.vel.x = move.x * walk_speed
@@ -137,7 +148,6 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_pressed("attack2") && attack_cooldown <= 0.0:
 		self.fireball()
-
 
 	self.vel = self.move_and_slide(self.vel, Vector3.UP, true)
 
