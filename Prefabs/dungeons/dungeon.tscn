@@ -47,6 +47,7 @@ mesh = SubResource( 1 )
 skeleton = NodePath("../..")
 
 [node name="StaticBody" type="StaticBody" parent="NavMesh/Floor"]
+collision_layer = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="NavMesh/Floor/StaticBody"]
 shape = SubResource( 2 )
@@ -59,6 +60,7 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0
 mesh = SubResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="Ceiling"]
+collision_layer = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Ceiling/StaticBody"]
 shape = SubResource( 4 )

@@ -20,6 +20,8 @@ var attack_cooldown = 0.0
 
 onready var attack_animation = $Hud/Center/Attack1
 
+const fireball_scene: PackedScene = preload("res:///Prefabs/Fireball.tscn")
+
 var eye_height: float
 var vel = Vector3()
 
@@ -72,8 +74,11 @@ func punch():
 
 func fireball():
 	self.attack_cooldown = self.attack_delay
-
 	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+	var projectile = fireball_scene.instance()
+	projectile.transform = self.transform
+	projectile.direction = look
+	self.get_parent().add_child(projectile)
 
 
 func _physics_process(delta: float) -> void:
