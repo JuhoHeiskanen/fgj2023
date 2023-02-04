@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Materials/floor.tres" type="Material" id=1]
 [ext_resource path="res://Resources/coolman_eyesbleed.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Resources/3d_sprites/hudskull.png" type="Texture" id=5]
 [ext_resource path="res://Prefabs/Torch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Environments/void.tres" type="Environment" id=7]
+[ext_resource path="res://Prefabs/MonsterSprite.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Resources/3d_sprites/menemy_4sheet.png" type="Texture" id=9]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 24, 2, 24 )
@@ -43,6 +45,11 @@ albedo_texture = ExtResource( 2 )
 flags_transparent = true
 params_billboard_mode = 2
 albedo_texture = ExtResource( 5 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 64, 64 )
 
 [node name="JuhonTestiSkene" type="Spatial"]
 
@@ -106,26 +113,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76264, 0 )
 
 [node name="Skeleton_Eyesbleed" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+visible = false
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="Skeleton_Eyesbleed2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52976, 2, 0 )
+visible = false
 mesh = SubResource( 5 )
 material/0 = SubResource( 13 )
 
 [node name="Skeleton_Eyesbleed3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52976, 2, 1.45828 )
+visible = false
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="Skeleton_Eyesbleed4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.206313, 2, 1.45828 )
+visible = false
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="Skeleton_Eyesbleed5" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.206313, 2, 1.45828 )
+visible = false
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
@@ -149,3 +161,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06552, 1, -0.7734 )
 
 [node name="Spatial6" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51503, 3.03089, -6.44445 )
+
+[node name="MonsterSprite" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97707, -1.46905 )
+front = SubResource( 14 )
