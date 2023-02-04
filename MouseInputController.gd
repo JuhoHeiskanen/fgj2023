@@ -40,6 +40,11 @@ func handle_left_click(event: InputEventMouseButton):
 		var tilemap = $LevelContainer/TileMap
 		var local_pos = tilemap.to_local(pos)
 		#print("Local pos: ", local_pos)
+
+		# If clicked above the "ground line", can't place tiles
+		if local_pos.y <= 0:
+			return
+
 		var tile_pos = tilemap.world_to_map(local_pos)
 		#print("Tile pos: ", tile_pos)
 		#print("Setting tile to: ", active_tile)

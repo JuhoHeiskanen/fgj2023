@@ -42,16 +42,23 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 cell_quadrant_size = 128
 cell_y_sort = true
-show_collision = true
 centered_textures = true
 format = 1
 tile_data = PoolIntArray( 0, 7, 0, 1, 2, 0, 2, 2, 0, 3, 4, 0, 65536, 6, 0, 65537, 2, 0, 65538, 2, 0, 65539, 5, 0 )
 script = ExtResource( 3 )
 
 [node name="Birb" type="AnimatedSprite" parent="LevelContainer"]
-position = Vector2( 141, -131 )
+position = Vector2( -323, -150 )
 frames = SubResource( 3 )
 playing = true
+offset = Vector2( 464, 19 )
+flip_h = true
+
+[node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
+position = Vector2( 427, -151 )
+frames = SubResource( 3 )
+playing = true
+offset = Vector2( 464, 19 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 128.0
