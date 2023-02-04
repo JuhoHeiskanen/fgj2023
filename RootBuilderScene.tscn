@@ -44,6 +44,7 @@ script = ExtResource( 2 )
 [node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 581, -195 )
 frames = ExtResource( 10 )
+frame = 1
 playing = true
 
 [node name="BackgroundSprite" type="Sprite" parent="LevelContainer"]
@@ -72,6 +73,7 @@ script = ExtResource( 3 )
 [node name="Birb" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( -323, -150 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 flip_h = true
@@ -79,6 +81,7 @@ flip_h = true
 [node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 427, -151 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 

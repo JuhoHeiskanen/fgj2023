@@ -9,7 +9,7 @@ var scene3d = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	show_builder_scene()
-
+	builder_scene.connect("start_3d_scene", self, "show_3d_scene")
 
 func show_builder_scene():
 	if scene3d:
@@ -23,11 +23,9 @@ func show_builder_scene():
 		builder_scene = builder_prefab.instance()
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	builder_scene.connect("start_3d_scene", self, "show_3d_scene")
 	self.add_child(builder_scene)
 
 func show_3d_scene(data):
-	builder_scene.disconnect("start_3d_scene", self, "show_3d_scene")
 	self.remove_child(builder_scene)
 	
 	var offset_x = data[1]

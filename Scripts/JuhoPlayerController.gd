@@ -94,7 +94,9 @@ func punch():
 	var look = Vector3.FORWARD.rotated(Vector3.LEFT, -pitch).rotated(Vector3.UP, -yaw)
 	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
 	if result && result.collider:
-		if result.collider.has_method("hurt"):
+		if result.collider.is_in_group("exit"):
+			call_deferred("emit_signal", "back_to_builder")
+		elif result.collider.has_method("hurt"):
 			$FistHit.play()
 			result.collider.hurt(self.attack_damage)
 
@@ -131,9 +133,6 @@ func _physics_process(delta: float) -> void:
 		self.vel.y = jump_force
 
 	if Input.is_action_pressed("attack") && attack_cooldown <= 0.0:
-		if self.translation.distance_to(self.start_position) < 1:
-			emit_signal("back_to_builder")
-			return
 		self.punch()
 
 	if Input.is_action_pressed("attack2") && attack_cooldown <= 0.0:
