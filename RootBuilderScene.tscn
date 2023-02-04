@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Resources/birb_sprites/birb31.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/TilePreview.gd" type="Script" id=7]
 [ext_resource path="res://Resources/3way_tile.png" type="Texture" id=8]
+[ext_resource path="res://Resources/gras_dec.png" type="Texture" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -29,43 +30,6 @@ animations = [ {
 
 [node name="RootBuilderScene" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="LevelContainer" type="Node2D" parent="."]
-
-[node name="BackgroundSprite" type="Sprite" parent="LevelContainer"]
-position = Vector2( 600, 1000 )
-texture = ExtResource( 4 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 1200, 2000 )
-
-[node name="TileMap" type="TileMap" parent="LevelContainer"]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 128, 128 )
-cell_quadrant_size = 128
-cell_y_sort = true
-centered_textures = true
-format = 1
-tile_data = PoolIntArray( 4, 12, 0 )
-script = ExtResource( 3 )
-
-[node name="Birb" type="AnimatedSprite" parent="LevelContainer"]
-position = Vector2( -323, -150 )
-frames = SubResource( 3 )
-playing = true
-offset = Vector2( 464, 19 )
-flip_h = true
-
-[node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
-position = Vector2( 427, -151 )
-frames = SubResource( 3 )
-playing = true
-offset = Vector2( 464, 19 )
-
-[node name="TilePreview" type="Sprite" parent="LevelContainer"]
-modulate = Color( 1, 1, 1, 0.7 )
-position = Vector2( -191, 94 )
-texture = ExtResource( 8 )
-script = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 128.0
@@ -95,6 +59,59 @@ margin_left = 87.0
 margin_right = 107.0
 margin_bottom = 44.0
 text = "X"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enable = true
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 1022.0
+margin_bottom = 599.0
+
+[node name="LevelContainer" type="Node2D" parent="CanvasLayer/Control"]
+
+[node name="BackgroundSprite" type="Sprite" parent="CanvasLayer/Control/LevelContainer"]
+position = Vector2( 540, 1000 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 2000 )
+
+[node name="Grass" type="Sprite" parent="CanvasLayer/Control/LevelContainer"]
+texture = ExtResource( 9 )
+offset = Vector2( 540, -40 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1080, 128 )
+
+[node name="TileMap" type="TileMap" parent="CanvasLayer/Control/LevelContainer"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 128
+cell_y_sort = true
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( 4, 12, 0 )
+script = ExtResource( 3 )
+
+[node name="Birb" type="AnimatedSprite" parent="CanvasLayer/Control/LevelContainer"]
+position = Vector2( -323, -150 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+offset = Vector2( 464, 19 )
+flip_h = true
+
+[node name="Birb2" type="AnimatedSprite" parent="CanvasLayer/Control/LevelContainer"]
+position = Vector2( 427, -151 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+offset = Vector2( 464, 19 )
+
+[node name="TilePreview" type="Sprite" parent="CanvasLayer/Control/LevelContainer"]
+modulate = Color( 1, 1, 1, 0.7 )
+position = Vector2( -191, 94 )
+texture = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [connection signal="pressed" from="HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
