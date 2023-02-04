@@ -45,7 +45,7 @@ func initialize(grid):
 			room.transform.origin.z = z * SIZE_Z
 			var room_navmesh = room.get_node("NavMesh")
 			self.add_child(room)
-			
+
 			if z == 0-offset_z and x == 4-offset_x:
 				room.add_exit_door()
 
@@ -75,16 +75,18 @@ func initialize(grid):
 				room.open_exit(room.Direction.WEST, has_west)
 			else:
 				room.close_exit(room.Direction.WEST)
-			
+
+			room.setup_resource(type)
+
 			monster_spawns.append_array(room.get_monster_spawns())
-		
+
 			room_navmesh.transform.origin.x = x * SIZE_X
 			room_navmesh.transform.origin.z = z * SIZE_Z
 			room.remove_child(room_navmesh)
 			self.nav_mesh.add_child(room_navmesh)
-				
+
 	NavigationMeshGenerator.bake(nav_mesh.navmesh, self.nav_mesh)
-	
+
 	player.transform.origin = Vector3((4-offset_x) * SIZE_X, 1, (0-offset_z) * SIZE_Z - SIZE_Z/2 + 2)
 	player.yaw = PI
 

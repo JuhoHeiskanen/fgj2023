@@ -17,6 +17,8 @@ onready var door_colshape_south = $Door_down/StaticBody/CollisionShape
 onready var door_colshape_east = $Door_right/StaticBody/CollisionShape
 onready var door_colshape_west = $Door_left/StaticBody/CollisionShape
 
+onready var resource_spawner = $ResourceSpawner
+
 enum Direction {
 	NORTH,
 	SOUTH,
@@ -39,6 +41,12 @@ func get_monster_spawns():
 
 func add_exit_door():
 	connector_north.add_exit_door()
+
+func setup_resource(resource: int):
+	if resource == 1:
+		remove_child(resource_spawner)
+	else:
+		resource_spawner.resource_kind = resource
 
 func open_exit(dir, connection):
 	match dir:

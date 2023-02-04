@@ -1,12 +1,39 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Resources/3d_sprites/shroom_lv2.png" type="Texture" id=1]
 [ext_resource path="res://Resources/3d_sprites/resource_slime.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/ResourceSpawner.gd" type="Script" id=3]
+[ext_resource path="res://Resources/3d_sprites/iron.png" type="Texture" id=4]
+[ext_resource path="res://Resources/3d_sprites/calcium.png" type="Texture" id=5]
+[ext_resource path="res://Resources/3d_sprites/water.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 6.0
@@ -31,6 +58,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676397, 0 )
 
 [node name="Shroom" type="AnimatedSprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325604, 0 )
+visible = false
+billboard = 2
+frames = SubResource( 9 )
+playing = true
+
+[node name="Calcium" type="AnimatedSprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42225, 0 )
+visible = false
+billboard = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="Water" type="AnimatedSprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42225, 0 )
+visible = false
+billboard = 2
+frames = SubResource( 11 )
+playing = true
+
+[node name="Iron" type="AnimatedSprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42225, 0 )
 visible = false
 billboard = 2
 frames = SubResource( 7 )

@@ -106,8 +106,10 @@ func serialize_tilemap():
 
 			var bitmask = ((initial_bitmask << rotation) | (initial_bitmask >> (4 - rotation))) & 0b1111
 
-			var tile_resource = resource_map[x][y]
-			var data = [tile_resource , bitmask]
+			var tile_resource = resource_map[y][x]
+			if cell == -1:
+				tile_resource = 0
+			var data = [tile_resource, bitmask]
 			row.append(data)
 		output.append(row)
 		
