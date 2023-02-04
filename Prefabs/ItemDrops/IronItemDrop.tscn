@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Prefabs/ItemDrop.tscn" type="PackedScene" id=1]
+
+[node name="IronItemDrop" type="Spatial"]
+
+[node name="ItemDrop" parent="." instance=ExtResource( 1 )]
+kind = 2
+amount = 1.0
