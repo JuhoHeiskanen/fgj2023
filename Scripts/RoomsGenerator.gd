@@ -57,7 +57,7 @@ func initialize(grid):
 			var has_north = z > 0 && grid[z - 1][x][0] && grid[z - 1][x][1] & 4 > 0
 			var has_east = x + 1 < W && grid[z][x + 1][0] && grid[z][x + 1][1] & 8 > 0
 			var has_south = z + 1 < H && grid[z + 1][x][0] && grid[z + 1][x][1] & 1 > 0
-			var has_west = x > 0 && grid[z][x - 1][0] && grid[z][x - 1][0] & 2 > 0
+			var has_west = x > 0 && grid[z][x - 1][0] && grid[z][x - 1][1] & 2 > 0
 
 			if north_open:
 				room.open_exit(room.Direction.NORTH, has_north)
