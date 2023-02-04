@@ -1,21 +1,72 @@
 extends TileMap
 
-const initial_tiles_x = 10
-const initial_tiles_y = 40
+const RESOURCE_NONE = 1
+const RESOURCE_CALC = 2
+const RESOURCE_IRON = 3
+const RESOURCE_WATER = 4
+
+const GENERATION_RANGE_X = 15
+const GENERATION_RANGE_Y = 40
+
+var RES_TEXTURE_WATER = load("res://Resources/3d_sprites/water.png")
+var RES_TEXTURE_IRON = load("res://Resources/3d_sprites/iron.png")
+var RES_TEXTURE_CALC = load("res://Resources/3d_sprites/calcium.png")
+
+var resource_map = [];
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-	# print("Initializing Tilemap")
-	# for x in range(0, initial_tiles_x):
-	# 	for y in range(0, initial_tiles_y):
-	# 		self.set_cellv(Vector2(x,y), 0)
+	print("Initializing Tilemap")
 
+	# Randomly generate resources
+	for _y in range(0, GENERATION_RANGE_X):
+		var row = []
+		for _x in range(0, GENERATION_RANGE_Y):
+			var res = roll_resource()
+			row.append(res if _y > 1 else RESOURCE_NONE)
+		resource_map.append(row)
+
+	spawn_resource_sprites()
+
+func spawn_resource_sprites():
+	for y in resource_map.size():
+		var row = resource_map[y]
+		for x in row:
+			var res = row[x] 
+			if res == RESOURCE_NONE:
+				continue
+
+			var sprite = Sprite.new()
+			sprite.scale = Vector2(0.7, 0.7)
+			match res:
+				RESOURCE_WATER:
+					sprite.texture = RES_TEXTURE_WATER
+				RESOURCE_CALC:
+					sprite.texture = RES_TEXTURE_CALC
+				RESOURCE_IRON:
+					sprite.texture = RES_TEXTURE_IRON
+
+			var cell_pos = map_to_world(Vector2(x, y))
+			sprite.position = cell_pos
+			sprite.centered = false
+			add_child(sprite)
+
+
+func roll_resource():
+	var val = randf()
+
+	if val < 0.1:
+		return RESOURCE_CALC
+	elif val < 0.2:
+		return RESOURCE_IRON
+	elif val < 0.3:
+		return RESOURCE_WATER
+	else:
+		return RESOURCE_NONE
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
 		var data = serialize_tilemap()
-
 
 		var root = get_tree().get_root()
 		var current_scene = root.get_child(root.get_child_count() - 1)
@@ -26,7 +77,7 @@ func _input(event: InputEvent):
 		print("Loaded scene: ", instance)
 
 		instance.get_node("RoomsGenerator").tiles = data
-		
+
 		root.add_child(instance)
 		get_tree().set_current_scene(instance)
 
@@ -46,7 +97,9 @@ func serialize_tilemap():
 			var initial_bitmask = [Globals.BITMASK_I, Globals.BITMASK_L, Globals.BITMASK_T, Globals.BITMASK_X][cell_type]
 
 			var bitmask = ((initial_bitmask << rotation) | (initial_bitmask >> (4 - rotation))) & 0b1111
-			var data = [1 , bitmask]
+
+			var tile_resource = resource_map[x][y]
+			var data = [tile_resource , bitmask]
 			row.append(data)
 		output.append(row)
 

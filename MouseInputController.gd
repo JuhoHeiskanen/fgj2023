@@ -94,7 +94,6 @@ func place_cell(tile_pos: Vector2):
 
 	# This should go through the 4 surrounding cells: above, right, under, left
 	var valid = false
-	#var surrounding_cells = []
 	var newtile_bitmask = get_rotated_tile_bitmap(int(active_tile / Globals.TILE_INDEX_OFFSET), tile_rotation)
 
 	print("New tile bitmask: ", newtile_bitmask)
