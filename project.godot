@@ -17,7 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
-Resources="*res://Prefabs/Resources.gd"
+Resources="*res://Prefabs/Resources.tscn"
 
 [display]
 
