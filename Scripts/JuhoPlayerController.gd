@@ -28,6 +28,7 @@ func hurt(damage: int):
 	hp -= damage
 	self.hurt_animation.frame = 0
 	self.hurt_animation.play()
+	$GetHit.play()
 	self.update_hp_display()
 
 func update_hp_display():
@@ -80,6 +81,7 @@ func punch():
 	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
 	if result && result.collider:
 		if result.collider.has_method("hurt"):
+			$FistHit.play()
 			result.collider.hurt(self.attack_damage)
 
 
@@ -89,6 +91,7 @@ func fireball():
 	var projectile = fireball_scene.instance()
 	projectile.translation = self.translation + $Yaw.translation
 	projectile.direction = look
+	$Fireball.play()
 	self.get_parent().add_child(projectile)
 
 

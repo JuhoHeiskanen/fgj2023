@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Prefabs/RoomsGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/EnemyGenerator.gd" type="Script" id=3]
+[ext_resource path="res://Resources/audio/fireball_fixd.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Resources/audio/send_help_atkmix.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Resources/audio/slap_fixd.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Resources/audio/strike_fixd.ogg" type="AudioStream" id=7]
 
 [node name="Root2" type="Spatial"]
 
@@ -11,11 +15,29 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49029, 4.58793 )
 
+[node name="Fireball" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 4 )
+volume_db = -6.0
+
+[node name="FistHit" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 7 )
+volume_db = -6.0
+
+[node name="GetHit" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 6 )
+volume_db = -3.0
+
 [node name="EnemyGenerator" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="EnemyGenerator"]
 wait_time = 5.0
 autostart = true
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 5 )
+volume_db = -6.0
+autoplay = true
 
 [connection signal="timeout" from="EnemyGenerator/Timer" to="EnemyGenerator" method="_on_Timer_timeout"]
