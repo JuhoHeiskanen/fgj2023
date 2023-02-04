@@ -10,8 +10,8 @@ export var back: Texture
 export var right: Texture
 export var left: Texture
 
-onready var player: Node = $"../Player"
-onready var yaw: Node = $"../Player/Yaw"
+onready var player: Node = $"../../Player"
+onready var yaw: Node = $"../../Player/Yaw"
 
 export var angle: float
 
