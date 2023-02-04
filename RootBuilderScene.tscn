@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://MouseInputController.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/TileMapController.gd" type="Script" id=3]
+[ext_resource path="res://Resources/empty_tile.png" type="Texture" id=4]
+
+[node name="RootBuilderScene" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 600, 1000 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1200, 2000 )
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 0.75, 0.75 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 128
+cell_y_sort = true
+show_collision = true
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( 65537, 0, 0, 65538, 8, 0, 65539, 11, 0, 65540, 12, 0 )
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 128.0
+margin_bottom = 44.0
+alignment = 1
+
+[node name="ButtonL" type="Button" parent="HBoxContainer"]
+margin_left = 20.0
+margin_right = 39.0
+margin_bottom = 44.0
+text = "L"
+
+[node name="ButtonI" type="Button" parent="HBoxContainer"]
+margin_left = 43.0
+margin_right = 60.0
+margin_bottom = 44.0
+text = "I"
+
+[node name="ButtonT" type="Button" parent="HBoxContainer"]
+margin_left = 64.0
+margin_right = 83.0
+margin_bottom = 44.0
+text = "T"
+
+[node name="ButtonX" type="Button" parent="HBoxContainer"]
+margin_left = 87.0
+margin_right = 107.0
+margin_bottom = 44.0
+text = "X"
+
+[connection signal="pressed" from="HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]
