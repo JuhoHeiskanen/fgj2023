@@ -41,8 +41,10 @@ func initialize(grid):
 			room.transform.origin.x = x * SIZE_X
 			room.transform.origin.z = z * SIZE_Z
 			var room_navmesh = room.get_node("NavMesh")
-
 			self.add_child(room)
+			
+			if z == 0 and x == 0:
+				room.add_exit_door()
 
 			var north_open = mask & 1 > 0
 			var east_open = mask & 2 > 0

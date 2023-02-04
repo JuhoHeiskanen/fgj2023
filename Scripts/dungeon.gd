@@ -37,11 +37,14 @@ func get_monster_spawns():
 		
 	return spawns
 
+func add_exit_door():
+	connector_north.add_exit_door()
+
 func open_exit(dir, connection):
 	match dir:
 		Direction.NORTH:
 			self.remove_child(door_north)
-			if (!connection):
+			if (!connection and !connector_north.has_exit_door()):
 				connector_north.add_monster_wall()
 		Direction.SOUTH:
 			self.remove_child(door_south)
