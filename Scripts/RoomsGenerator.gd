@@ -20,7 +20,6 @@ var tiles = [
 	[[1, 1], [1, 3], [1, 8]],
 ]
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	initialize(tiles)
