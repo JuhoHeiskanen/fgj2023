@@ -2,6 +2,10 @@ extends KinematicBody
 
 export var speed: float = 3
 export var hp: int = 2
+export var melee_range: float = 1.5
+export var melee_damage: int = 1
+export var melee_cooldown: float = 0.0
+export var melee_delay: float = 2.5
 
 onready var player = $"../Player"
 onready var navigation: NavigationAgent = $"NavigationAgent"
@@ -19,6 +23,14 @@ func _ready():
 	NavigationServer.set_active(true)
 
 func _physics_process(delta):
+	if melee_cooldown <= 0:
+		var diff_to_player: Vector3 = player.translation - self.translation
+		if diff_to_player.length_squared() <= melee_range * melee_range:
+			melee_cooldown = melee_delay
+			player.hurt(self.melee_damage)
+	else:
+		melee_cooldown -= delta
+
 	navigation.set_max_speed(speed)
 	navigation.set_target_location(player.translation)
 	var next_location = navigation.get_next_location()

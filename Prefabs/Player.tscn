@@ -139,6 +139,17 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource( 5 )
 
+[node name="Center" type="Control" parent="Hud/CanvasLayer/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+
+[node name="Attack1" type="AnimatedSprite" parent="Hud/CanvasLayer/CanvasLayer/Center"]
+frames = SubResource( 8 )
+frame = 7
+offset = Vector2( 0, -32 )
+
 [node name="Hudcrosshair" type="TextureRect" parent="Hud"]
 anchor_left = 0.5
 anchor_top = 0.5

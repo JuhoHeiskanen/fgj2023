@@ -21,6 +21,7 @@ export var melee_distance = 2
 var attack_cooldown = 0.0
 
 onready var attack_animation = $Hud/Center/Attack1
+onready var hurt_animation = $Hud/CanvasLayer/CanvasLayer/Center/Attack1
 
 const fireball_scene: PackedScene = preload("res:///Prefabs/Fireball.tscn")
 
@@ -29,6 +30,8 @@ var vel = Vector3()
 
 func hurt(damage: int):
 	hp -= damage
+	self.hurt_animation.frame = 0
+	self.hurt_animation.play()
 	self.update_hp_display()
 
 func update_hp_display():
