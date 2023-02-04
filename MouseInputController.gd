@@ -11,7 +11,8 @@ var TILE_TEXTURE_L = load("res://Resources/l_tile.png")
 var TILE_TEXTURE_T = load("res://Resources/3way_tile.png")
 var TILE_TEXTURE_X = load("res://Resources/4way_tile.png")
 
-onready var tilemap = $LevelContainer/TileMap
+onready var tilemap = $CanvasLayer/Control/LevelContainer/TileMap
+onready var preview = $CanvasLayer/Control/LevelContainer/TilePreview
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,7 +38,7 @@ func handle_mouse_move(event: InputEventMouseMotion):
 	if local_pos.y <= 0:
 		return
 
-	var sprite: Sprite = $LevelContainer/TilePreview
+	var sprite: Sprite = $CanvasLayer/Control/LevelContainer/TilePreview
 	var tile_pos = Vector2(
 		int((local_pos.x / tilemap.cell_size.x)) * tilemap.cell_size.x * tilemap.scale.x + sprite.texture.get_width() / 2,
 		int((local_pos.y / tilemap.cell_size.y)) * tilemap.cell_size.y * tilemap.scale.y + sprite.texture.get_height() / 2
@@ -51,7 +52,7 @@ func handle_button_press(event: InputEventKey):
 			rotate_tile()
 
 func handle_mouse_scroll(event: InputEventMouseButton):
-	var container = $LevelContainer
+	var container = $CanvasLayer/Control/LevelContainer
 	if event.pressed && event.button_index == BUTTON_WHEEL_DOWN:
 		container.position.y -= 16;
 	if event.pressed && event.button_index == BUTTON_WHEEL_UP:
@@ -145,33 +146,28 @@ func rotate_tile():
 	update_preview_rotation()
 
 func update_preview_rotation():
-	var preview = $LevelContainer/TilePreview
 	preview.rotation = (tile_rotation * 90) / (180/PI)
 
 func _on_ButtonI_pressed():
 	print("Pressed I tile button")
 	active_tile = TILE.I * Globals.TILE_INDEX_OFFSET
-	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_I
 	update_preview_rotation()
 
 func _on_ButtonT_pressed():
 	print("Pressed T tile button")
 	active_tile = TILE.T * Globals.TILE_INDEX_OFFSET
-	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_T
 	update_preview_rotation()
 
 func _on_ButtonL_pressed():
 	print("Pressed L tile button")
 	active_tile = TILE.L * Globals.TILE_INDEX_OFFSET
-	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_L
 	update_preview_rotation()
 
 func _on_ButtonX_pressed():
 	print("Pressed X tile button")
 	active_tile = TILE.X * Globals.TILE_INDEX_OFFSET
-	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_X
 	update_preview_rotation()
