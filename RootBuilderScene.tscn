@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/TileMapController.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=3]
 [ext_resource path="res://Resources/empty_tile.png" type="Texture" id=4]
 [ext_resource path="res://Resources/birb_sprites/birb3.png" type="Texture" id=5]
 [ext_resource path="res://Resources/birb_sprites/birb31.png" type="Texture" id=6]

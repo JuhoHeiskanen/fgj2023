@@ -1,7 +1,6 @@
 extends Node2D
 
 enum TILE {I, L, T, X}
-const TILE_INDEX_OFFSET = 4
 enum ROTATION {ROT_0, ROT_90, ROT_180, ROT_270}
 
 var active_tile = TILE.I
@@ -11,6 +10,8 @@ var TILE_TEXTURE_I = load("res://Resources/hetero_tile.png")
 var TILE_TEXTURE_L = load("res://Resources/l_tile.png")
 var TILE_TEXTURE_T = load("res://Resources/3way_tile.png")
 var TILE_TEXTURE_X = load("res://Resources/4way_tile.png")
+
+onready var tilemap = $LevelContainer/TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +32,6 @@ func _input(event: InputEvent):
 
 func handle_mouse_move(event: InputEventMouseMotion):
 	var pos = event.position
-	var tilemap = $LevelContainer/TileMap
 
 	var local_pos = tilemap.to_local(pos)
 	if local_pos.y <= 0:
@@ -61,7 +61,6 @@ func handle_left_click(event: InputEventMouseButton):
 	if event.pressed && event.button_index == BUTTON_LEFT:
 		var pos = event.position
 		#print("Mouse Click at: ", pos)
-		var tilemap = $LevelContainer/TileMap
 		var local_pos = tilemap.to_local(pos)
 		#print("Local pos: ", local_pos)
 
@@ -72,13 +71,25 @@ func handle_left_click(event: InputEventMouseButton):
 		var tile_pos = tilemap.world_to_map(local_pos)
 		#print("Tile pos: ", tile_pos)
 		#print("Setting tile to: ", active_tile)
+		place_cell(tile_pos)
 
-		# don't allow overriding non-empty cells
-		var cell = tilemap.get_cellv(tile_pos)
-		if cell != -1:
-			return
 
-		tilemap.set_cellv(tile_pos, active_tile + tile_rotation)
+func place_cell(tile_pos: Vector2):
+	# don't allow overriding non-empty cells
+	var cell = tilemap.get_cellv(tile_pos)
+	if cell != -1:
+		return
+
+	# This should give us 4 of the surrounding cells: above, right, under, left
+	var surrounding_cells = []
+	for x in [-1, 1]:
+		for y in [-1, 1]:
+			var c = tilemap.get_cell(tile_pos.x + x, tile_pos.y + y)
+			surrounding_cells.append(c)
+
+	tilemap.set_cellv(tile_pos, active_tile + tile_rotation)
+
+	
 
 func rotate_tile():
 	tile_rotation = (tile_rotation + 1)  % (ROTATION.ROT_270 + 1)
@@ -90,28 +101,28 @@ func update_preview_rotation():
 
 func _on_ButtonI_pressed():
 	print("Pressed I tile button")
-	active_tile = TILE.I * TILE_INDEX_OFFSET
+	active_tile = TILE.I * Globals.TILE_INDEX_OFFSET
 	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_I
 	update_preview_rotation()
 
 func _on_ButtonT_pressed():
 	print("Pressed T tile button")
-	active_tile = TILE.T * TILE_INDEX_OFFSET
+	active_tile = TILE.T * Globals.TILE_INDEX_OFFSET
 	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_T
 	update_preview_rotation()
 
 func _on_ButtonL_pressed():
 	print("Pressed L tile button")
-	active_tile = TILE.L * TILE_INDEX_OFFSET
+	active_tile = TILE.L * Globals.TILE_INDEX_OFFSET
 	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_L
 	update_preview_rotation()
 
 func _on_ButtonX_pressed():
 	print("Pressed X tile button")
-	active_tile = TILE.X * TILE_INDEX_OFFSET
+	active_tile = TILE.X * Globals.TILE_INDEX_OFFSET
 	var preview = $LevelContainer/TilePreview
 	preview.texture = TILE_TEXTURE_X
 	update_preview_rotation()
