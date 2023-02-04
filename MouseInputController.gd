@@ -3,7 +3,7 @@ extends Node2D
 enum TILE {NONE, L, I, T, X}
 enum ROTATION {ROT_0, ROT_90, ROT_180, ROT_270}
 
-var active_tile = TILE.I
+var active_tile = TILE.NONE
 var tile_rotation = ROTATION.ROT_0;
 
 # Called when the node enters the scene tree for the first time.
@@ -25,8 +25,6 @@ func handle_button_press(event: InputEventKey):
 		KEY_R:
 			rotate_tile()
 			
-
-	
 func handle_mouse_scroll(event: InputEventMouseButton):
 	var tilemap = $TileMap
 	if event.pressed && event.button_index == BUTTON_WHEEL_DOWN:
@@ -46,8 +44,15 @@ func handle_left_click(event: InputEventMouseButton):
 		#var cell = tilemap.get_cellv(tile_pos)
 
 		print("Setting tile to: ", active_tile)
-		tilemap.set_cellv(tile_pos, active_tile)
-
+		# TODO: This fucking shit doesn't work lmao
+		# Fix later maybe
+		tilemap.set_cellv(
+			tile_pos,
+			active_tile,
+			tile_rotation == ROTATION.ROT_90 || tile_rotation == ROTATION.ROT_270, # FlipX
+			tile_rotation == ROTATION.ROT_180, # FlipY
+			tile_rotation == ROTATION.ROT_90 || tile_rotation == ROTATION.ROT_270 # Transpose
+			)
 
 func rotate_tile():
 	tile_rotation = (tile_rotation + 1)  % (ROTATION.ROT_270 + 1)
