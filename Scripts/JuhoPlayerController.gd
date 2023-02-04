@@ -14,6 +14,8 @@ export var sensitivity: float = 1
 export var gravity: float = 9.81
 
 export var attack_delay = .5
+export var attack_damage = 1
+export var melee_distance = 2
 var attack_cooldown = 0.0
 
 onready var attack_animation = $Hud/Center/Attack1
@@ -59,9 +61,20 @@ func punch():
 	self.attack_cooldown = self.attack_delay
 	self.attack_animation.frame = 0
 	self.attack_animation.play()
-		
+	
+	var space_state = get_world().direct_space_state
+	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
+	if result && result.collider:
+		if result.collider.has_method("hurt"):
+			result.collider.hurt(self.attack_damage)
+
+
 func fireball():
 	self.attack_cooldown = self.attack_delay
+
+	var look = Vector3.FORWARD.rotated(Vector3.UP, -yaw).rotated(Vector3.LEFT, pitch)
+
 
 func _physics_process(delta: float) -> void:
 	if self.attack_cooldown > 0:
