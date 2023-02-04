@@ -14,7 +14,21 @@ func _ready():
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
-		serialize_tilemap()
+		var data = serialize_tilemap()
+
+
+		var root = get_tree().get_root()
+		var current_scene = root.get_child(root.get_child_count() - 1)
+		current_scene.queue_free()
+
+		var scene = load("res://Prefabs/RoomsGenerator.tscn")
+		var instance = scene.instance();
+		print("Loaded scene: ", instance)
+
+		instance.tiles = data
+		
+		root.add_child(instance)
+		get_tree().set_current_scene(instance)
 
 
 const FLAG_NORTH = 1
@@ -34,8 +48,9 @@ func serialize_tilemap():
 
 	var output = []
 
-	for x in range(start.x, end.x):
-		for y in range(start.y, end.y):
+	for y in range(start.y, end.y):
+		var row = []
+		for x in range(start.x, end.x):
 			var cell = get_cell(x, y)
 			var cell_type = int(cell / 4) if cell != -1 else 0
 			var rotation = cell % 4 if cell != -1 else 0
@@ -43,6 +58,8 @@ func serialize_tilemap():
 
 			var bitmask = ((initial_bitmask << rotation) | (initial_bitmask >> (4 - rotation))) & 0b1111
 			var data = [cell_type , bitmask]
-			output.append(data)
+			row.append(data)
+		output.append(row)
 
 	print(output)
+	return output

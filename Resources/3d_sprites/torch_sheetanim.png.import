@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/ceiling.png-6f47a79140d98c35b98c61e07bff6bcf.s3tc.stex"
-path.etc2="res://.import/ceiling.png-6f47a79140d98c35b98c61e07bff6bcf.etc2.stex"
+path.s3tc="res://.import/torch_sheetanim.png-ee8d1055db41b7d7c760865f6959eb69.s3tc.stex"
+path.etc2="res://.import/torch_sheetanim.png-ee8d1055db41b7d7c760865f6959eb69.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Resources/3d_sprites/ceiling.png"
-dest_files=[ "res://.import/ceiling.png-6f47a79140d98c35b98c61e07bff6bcf.s3tc.stex", "res://.import/ceiling.png-6f47a79140d98c35b98c61e07bff6bcf.etc2.stex" ]
+source_file="res://Resources/3d_sprites/torch_sheetanim.png"
+dest_files=[ "res://.import/torch_sheetanim.png-ee8d1055db41b7d7c760865f6959eb69.s3tc.stex", "res://.import/torch_sheetanim.png-ee8d1055db41b7d7c760865f6959eb69.etc2.stex" ]
 
 [params]
 
