@@ -23,6 +23,7 @@ const fireball_scene: PackedScene = preload("res:///Prefabs/Fireball.tscn")
 
 var eye_height: float
 var vel = Vector3()
+var dead = false
 
 func hurt(damage: int):
 	hp -= damage
@@ -30,6 +31,10 @@ func hurt(damage: int):
 	self.hurt_animation.play()
 	$GetHit.play()
 	self.update_hp_display()
+	if hp <= 0 and !dead:
+		dead = true
+		self.eye_height = -0.5
+		$Yaw/Pitch/Camera.transform = $Yaw/Pitch/Camera.transform.rotated(Vector3.FORWARD, PI/2)
 
 func update_hp_display():
 	var hp_ratio = float(hp) / float(max_hp) / 2 + 0.25
@@ -96,6 +101,8 @@ func fireball():
 
 
 func _physics_process(delta: float) -> void:
+	if dead: return
+
 	if self.attack_cooldown > 0:
 		self.attack_cooldown -= delta
 

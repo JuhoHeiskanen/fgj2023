@@ -33,7 +33,7 @@ func spawn_resource_sprites():
 	for y in resource_map.size():
 		var row = resource_map[y]
 		for x in row.size():
-			var res = row[x] 
+			var res = row[x]
 			if res == RESOURCE_NONE:
 				continue
 
@@ -84,7 +84,7 @@ func _input(event: InputEvent):
 		generator.tiles = data
 		generator.offset_x = offset_x
 		generator.offset_z = offset_z
-		
+
 
 		root.add_child(instance)
 		get_tree().set_current_scene(instance)
@@ -112,8 +112,7 @@ func serialize_tilemap():
 			var data = [tile_resource, bitmask]
 			row.append(data)
 		output.append(row)
-		
-	
+
 
 	print(output)
 	return [output, start.x, start.y]
