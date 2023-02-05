@@ -13,6 +13,6 @@ func _on_resources_updated():
 	update_labels()
 
 func update_labels():
-	calcLabel.text = str(Resources.calcium)
-	ironLabel.text = str(Resources.iron)
-	waterLabel.text = str(Resources.water)
+	calcLabel.text = str(round(Resources.calcium))
+	ironLabel.text = str(round(Resources.iron))
+	waterLabel.text = str(round(Resources.water))

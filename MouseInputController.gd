@@ -37,7 +37,6 @@ func _ready():
 	_on_ButtonI_pressed() # This resets the preview/tile type to the default I-tile
 	get_tree().get_root().connect("size_changed", self, "on_resize")
 
-
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
 		var data = tilemap.serialize_tilemap()
@@ -161,6 +160,24 @@ func place_cell(tile_pos: Vector2):
 			print("Valid connection to the DOWN")
 			valid = true
 			break
+
+	# Check cell price
+	match int(active_tile / Globals.TILE_INDEX_OFFSET):
+		TILE.I:
+			# No price
+			valid = valid &&  true
+		TILE.L:
+			valid = Resources.calcium >= 1 && valid
+			if valid:
+				Resources.calcium =- 1
+		TILE.T:
+			valid = Resources.water >= 1 && valid
+			if valid:
+				Resources.water =- 1
+		TILE.L:
+			valid = Resources.iron >= 1 && valid
+			if valid:
+				Resources.iron =- 1
 
 	if valid:
 		tilemap.set_cellv(tile_pos, active_tile + tile_rotation)

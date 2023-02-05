@@ -122,17 +122,29 @@ margin_right = 260.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 12 )
 
+[node name="Calc" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonL"]
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 15 )
+
 [node name="ButtonT" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
 margin_left = 264.0
 margin_right = 392.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 8 )
 
+[node name="Water" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonT"]
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 16 )
+
 [node name="ButtonX" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
 margin_left = 396.0
 margin_right = 524.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 13 )
+
+[node name="Iron" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonX"]
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 14 )
 
 [node name="Resources" type="HBoxContainer" parent="Hud/Hudfiller"]
 anchor_left = 1.0
@@ -177,8 +189,11 @@ text = "0"
 
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL/Calc" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonT/Water" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonX/Iron" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/Resources/Iron" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/Resources/Calc" to="." method="_on_ButtonL_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/Resources/Water" to="." method="_on_ButtonT_pressed"]
