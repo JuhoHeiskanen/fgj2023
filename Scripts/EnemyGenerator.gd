@@ -6,7 +6,7 @@ const boss_enemy_prefab: PackedScene = preload("res://Prefabs/BossOfThisGym.tscn
 onready var rooms_generator = $"../RoomsGenerator"
 onready var parent = $".."
 
-export var monsters_per_spawner = 5;
+export var monsters_per_spawner = 1;
 
 var monsters_spawned = 0
 var rng = RandomNumberGenerator.new()
