@@ -25,6 +25,9 @@ func show_builder_scene():
 		menu = null
 
 	if scene3d:
+		var resource_spawners = get_tree().get_nodes_in_group("resource-spawner")
+		for spawner in resource_spawners:
+			spawner.apply_resources()
 		var generator = scene3d.get_node("RoomsGenerator")
 		generator.clear_navmesh()
 		self.remove_child(scene3d)
