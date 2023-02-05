@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Scripts/TilePreview.gd" type="Script" id=7]
 [ext_resource path="res://Resources/3way_tile.png" type="Texture" id=8]
 [ext_resource path="res://Resources/gras_dec.png" type="Texture" id=9]
-[ext_resource path="res://Resources/shrooms/Shroom4Frames.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://Scripts/Shroom.gd" type="Script" id=10]
 [ext_resource path="res://Resources/3d_sprites/hudfiller_pink.png" type="Texture" id=11]
 [ext_resource path="res://Resources/l_tile.png" type="Texture" id=12]
 [ext_resource path="res://Resources/4way_tile.png" type="Texture" id=13]
@@ -17,6 +17,10 @@
 [ext_resource path="res://Resources/3d_sprites/calcium.png" type="Texture" id=15]
 [ext_resource path="res://Resources/3d_sprites/water.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/ResourceHUD.gd" type="Script" id=17]
+[ext_resource path="res://Resources/3d_sprites/upgrd_up.png" type="Texture" id=18]
+[ext_resource path="res://Resources/3d_sprites/upgrd_down.png" type="Texture" id=19]
+[ext_resource path="res://Resources/shrooms/Shroom1Frames.tres" type="SpriteFrames" id=20]
+[ext_resource path="res://Scripts/UpgradeButton.gd" type="Script" id=21]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -47,9 +51,9 @@ script = ExtResource( 2 )
 
 [node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 581, -195 )
-frames = ExtResource( 10 )
-frame = 1
+frames = ExtResource( 20 )
 playing = true
+script = ExtResource( 10 )
 
 [node name="BackgroundSprite" type="Sprite" parent="LevelContainer"]
 position = Vector2( 576, 1000 )
@@ -77,7 +81,6 @@ script = ExtResource( 3 )
 [node name="Birb" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( -323, -150 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 flip_h = true
@@ -85,7 +88,6 @@ flip_h = true
 [node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 427, -151 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 
@@ -186,6 +188,16 @@ texture_normal = ExtResource( 16 )
 margin_right = 40.0
 margin_bottom = 14.0
 text = "0"
+
+[node name="UpgradeButton" type="TextureButton" parent="Hud/Hudfiller"]
+margin_left = 513.0
+margin_top = -32.0
+margin_right = 577.0
+margin_bottom = 32.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 19 )
+script = ExtResource( 21 )
 
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
