@@ -9,7 +9,7 @@ spec:
       match: "Host(`paraspeli.fi`)"
       priority: 20
       services:
-        - name: fgj
+        - name: fgj23
           namespace:
           port: 80
   tls:
