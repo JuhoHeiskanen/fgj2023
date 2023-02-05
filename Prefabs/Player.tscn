@@ -1,13 +1,15 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/JuhoPlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Resources/3d_sprites/hudlifebarbg.png" type="Texture" id=2]
 [ext_resource path="res://Resources/3d_sprites/hudfiller.png" type="Texture" id=3]
-[ext_resource path="res://Resources/3d_sprites/hudbogdanoff.png" type="Texture" id=4]
-[ext_resource path="res://Resources/3d_sprites/hudskull.png" type="Texture" id=5]
 [ext_resource path="res://Materials/hp_material.tres" type="Material" id=6]
 [ext_resource path="res://Resources/3d_sprites/hudcrosshair.png" type="Texture" id=7]
 [ext_resource path="res://Resources/3d_sprites/pawch_anim.png" type="Texture" id=8]
+[ext_resource path="res://Resources/audio/fireball_fixd.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Resources/audio/slap_fixd.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Resources/audio/strike_fixd.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Resources/audio/walk.ogg" type="AudioStream" id=12]
 
 [sub_resource type="CapsuleMesh" id=3]
 radius = 0.5
@@ -100,44 +102,18 @@ texture = ExtResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="Hud/CanvasLayer"]
 layer = 3
 
-[node name="Hudbogdanoff" type="TextureRect" parent="Hud/CanvasLayer/CanvasLayer"]
-visible = false
-margin_left = 467.0
-margin_top = 405.0
-margin_right = 531.0
-margin_bottom = 469.0
-texture = ExtResource( 4 )
-
-[node name="Hudskull" type="TextureRect" parent="Hud/CanvasLayer/CanvasLayer"]
-visible = false
-margin_left = 593.0
-margin_top = 401.0
-margin_right = 657.0
-margin_bottom = 465.0
-texture = ExtResource( 5 )
-
 [node name="HpDisplayBase" type="ColorRect" parent="Hud/CanvasLayer/CanvasLayer"]
 material = ExtResource( 6 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -32.0
-margin_top = -64.0
-margin_right = 32.0
+margin_left = -64.0
+margin_top = -128.0
+margin_right = 64.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color( 1, 1, 1, 0.498039 )
-
-[node name="HpDisplayFront" type="TextureRect" parent="Hud/CanvasLayer/CanvasLayer"]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource( 5 )
 
 [node name="Center" type="Control" parent="Hud/CanvasLayer/CanvasLayer"]
 anchor_left = 0.5
@@ -172,3 +148,20 @@ frames = SubResource( 8 )
 [node name="OmniLight" type="OmniLight" parent="."]
 light_energy = 0.5
 omni_range = 2.6296
+
+[node name="Fireball" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -6.0
+
+[node name="FistHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -6.0
+
+[node name="GetHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -3.0
+
+[node name="Walk" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 12 )
+unit_db = -12.0
+pitch_scale = 1.11

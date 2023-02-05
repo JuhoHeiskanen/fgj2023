@@ -16,6 +16,9 @@ export var attack_damage = 2
 export var melee_distance = 2
 var attack_cooldown = 0.0
 
+var walk_cooldown = 0.0
+export var walk_delay = .4
+
 onready var attack_animation = $Hud/Center/Attack1
 onready var hurt_animation = $Hud/CanvasLayer/CanvasLayer/Center/Attack1
 
@@ -23,6 +26,11 @@ const fireball_scene: PackedScene = preload("res:///Prefabs/Fireball.tscn")
 
 var eye_height: float
 var vel = Vector3()
+var dead = false
+
+var start_position = Vector3()
+
+signal back_to_builder
 
 func hurt(damage: int):
 	hp -= damage
@@ -30,10 +38,19 @@ func hurt(damage: int):
 	self.hurt_animation.play()
 	$GetHit.play()
 	self.update_hp_display()
+	if hp <= 0 and !dead:
+		dead = true
+		self.eye_height = -0.5
+		$Yaw/Pitch/Camera.transform = $Yaw/Pitch/Camera.transform.rotated(Vector3.FORWARD, PI/2)
 
 func update_hp_display():
 	var hp_ratio = float(hp) / float(max_hp) / 2 + 0.25
 	$Hud/CanvasLayer/CanvasLayer/HpDisplayBase.color.a = hp_ratio
+	
+func set_start_position(vec):
+	start_position = vec
+	transform.origin = vec
+	yaw = PI
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -80,7 +97,9 @@ func punch():
 	var look = Vector3.FORWARD.rotated(Vector3.LEFT, -pitch).rotated(Vector3.UP, -yaw)
 	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
 	if result && result.collider:
-		if result.collider.has_method("hurt"):
+		if result.collider.is_in_group("exit"):
+			call_deferred("emit_signal", "back_to_builder")
+		elif result.collider.has_method("hurt"):
 			$FistHit.play()
 			result.collider.hurt(self.attack_damage)
 
@@ -96,6 +115,8 @@ func fireball():
 
 
 func _physics_process(delta: float) -> void:
+	if dead: return
+
 	if self.attack_cooldown > 0:
 		self.attack_cooldown -= delta
 
@@ -104,7 +125,15 @@ func _physics_process(delta: float) -> void:
 		0,
 		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	)
+	if move.length_squared() > 0.1:
+		self.walk_cooldown -= delta
+		if self.walk_cooldown <= 0:
+			$Walk.stream.loop = false
+			$Walk.pitch_scale = rand_range(0.8, 1.2)
+			$Walk.play()
+			self.walk_cooldown += self.walk_delay
 	move = move.normalized().rotated(Vector3.UP, -yaw)
+	
 	if Input.is_action_pressed("sprint"):
 		move = move * 4
 	self.vel.x = move.x * walk_speed
@@ -119,7 +148,6 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_pressed("attack2") && attack_cooldown <= 0.0:
 		self.fireball()
-
 
 	self.vel = self.move_and_slide(self.vel, Vector3.UP, true)
 

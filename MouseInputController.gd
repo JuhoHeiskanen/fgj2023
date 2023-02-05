@@ -15,8 +15,15 @@ onready var level_container = $LevelContainer
 onready var tilemap = $LevelContainer/TileMap
 onready var preview = $LevelContainer/TilePreview
 
+onready var buttonI: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonI
+onready var buttonL: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonL
+onready var buttonT: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonT
+onready var buttonX: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonX
+
 onready var referenceWidth = get_viewport_rect().size[0]
 onready var referenceHeight = get_viewport_rect().size[1]
+
+signal start_3d_scene
 
 func on_resize():
 	var viewport_size = get_viewport_rect().size
@@ -32,6 +39,11 @@ func _ready():
 
 
 func _input(event: InputEvent):
+	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
+		var data = tilemap.serialize_tilemap()
+		emit_signal("start_3d_scene", data)
+		return
+
 	if event is InputEventKey and event.pressed:
 		handle_button_press(event)
 
@@ -59,6 +71,14 @@ func handle_mouse_move(event: InputEventMouseMotion):
 func handle_button_press(event: InputEventKey):
 	# handle key presses
 	match event.scancode:
+		KEY_1:
+			_on_ButtonI_pressed()
+		KEY_2:
+			_on_ButtonL_pressed()
+		KEY_3:
+			_on_ButtonT_pressed()
+		KEY_4:
+			_on_ButtonX_pressed()
 		KEY_R:
 			rotate_tile()
 
@@ -162,22 +182,42 @@ func _on_ButtonI_pressed():
 	print("Pressed I tile button")
 	active_tile = TILE.I * Globals.TILE_INDEX_OFFSET
 	preview.texture = TILE_TEXTURE_I
+	reset_all_button_opacity()
+	highlight_button(buttonI)
 	update_preview_rotation()
 
 func _on_ButtonT_pressed():
 	print("Pressed T tile button")
 	active_tile = TILE.T * Globals.TILE_INDEX_OFFSET
 	preview.texture = TILE_TEXTURE_T
+	reset_all_button_opacity()
+	highlight_button(buttonT)
 	update_preview_rotation()
 
 func _on_ButtonL_pressed():
 	print("Pressed L tile button")
 	active_tile = TILE.L * Globals.TILE_INDEX_OFFSET
 	preview.texture = TILE_TEXTURE_L
+	reset_all_button_opacity()
+	highlight_button(buttonL)
 	update_preview_rotation()
 
 func _on_ButtonX_pressed():
 	print("Pressed X tile button")
 	active_tile = TILE.X * Globals.TILE_INDEX_OFFSET
 	preview.texture = TILE_TEXTURE_X
+	reset_all_button_opacity()
+	highlight_button(buttonX)
 	update_preview_rotation()
+
+
+func highlight_button(button: TextureButton):
+	var color = button.self_modulate
+	var newColor = Color(color.r, color.g, color.b, 1)
+	button.self_modulate = newColor
+
+func reset_all_button_opacity():
+	for button in [buttonI, buttonT, buttonL, buttonX]:
+		var color = button.self_modulate
+		var newColor = Color(color.r, color.g, color.b, 0.8)
+		button.self_modulate = newColor

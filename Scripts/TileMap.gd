@@ -33,7 +33,7 @@ func spawn_resource_sprites():
 	for y in resource_map.size():
 		var row = resource_map[y]
 		for x in row.size():
-			var res = row[x] 
+			var res = row[x]
 			if res == RESOURCE_NONE:
 				continue
 
@@ -65,30 +65,6 @@ func roll_resource():
 	else:
 		return RESOURCE_NONE
 
-func _input(event: InputEvent):
-	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
-		var data = serialize_tilemap()
-		var offset_x = data[1]
-		var offset_z = data[2]
-		data = data[0]
-
-		var root = get_tree().get_root()
-		var current_scene = root.get_child(root.get_child_count() - 1)
-		current_scene.queue_free()
-
-		var scene = load("res://MainScene3D.tscn")
-		var instance = scene.instance();
-		print("Loaded scene: ", instance)
-
-		var generator = instance.get_node("RoomsGenerator")
-		generator.tiles = data
-		generator.offset_x = offset_x
-		generator.offset_z = offset_z
-		
-
-		root.add_child(instance)
-		get_tree().set_current_scene(instance)
-
 func serialize_tilemap():
 	var cellRect = get_used_rect()
 	var start: Vector2 = cellRect.position
@@ -112,8 +88,7 @@ func serialize_tilemap():
 			var data = [tile_resource, bitmask]
 			row.append(data)
 		output.append(row)
-		
-	
+
 
 	print(output)
 	return [output, start.x, start.y]
