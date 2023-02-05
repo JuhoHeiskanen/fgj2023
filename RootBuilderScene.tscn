@@ -61,6 +61,7 @@ expand = true
 [node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 581, -195 )
 frames = ExtResource( 20 )
+frame = 1
 playing = true
 script = ExtResource( 10 )
 
@@ -90,6 +91,7 @@ script = ExtResource( 3 )
 [node name="Birb" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( -323, -150 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 flip_h = true
@@ -97,6 +99,7 @@ flip_h = true
 [node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 427, -151 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 
@@ -174,6 +177,8 @@ texture_normal = ExtResource( 14 )
 [node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Iron"]
 margin_right = 40.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.0901961, 0.0980392, 0, 1 )
 text = "0"
 
 [node name="Calc" type="TextureButton" parent="Hud/Hudfiller/Resources"]
@@ -185,6 +190,7 @@ texture_normal = ExtResource( 15 )
 [node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Calc"]
 margin_right = 40.0
 margin_bottom = 14.0
+custom_colors/font_color_shadow = Color( 0.0901961, 0.0980392, 0, 1 )
 text = "0"
 
 [node name="Water" type="TextureButton" parent="Hud/Hudfiller/Resources"]
