@@ -18,6 +18,10 @@ func _ready():
 	builder_scene = builder_prefab.instance()
 	builder_scene.connect("start_3d_scene", self, "show_3d_scene")
 
+func _process(_delta: float):
+	if Input.is_action_just_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+
 func show_builder_scene():
 	if menu:
 		self.remove_child(menu)

@@ -20,8 +20,8 @@ onready var buttonL: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonL
 onready var buttonT: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonT
 onready var buttonX: TextureButton = $Hud/Hudfiller/HBoxContainer/ButtonX
 
-onready var referenceWidth = get_viewport_rect().size[0]
-onready var referenceHeight = get_viewport_rect().size[1]
+onready var referenceWidth = 1152 # get_viewport_rect().size[0]
+onready var referenceHeight = 640 # get_viewport_rect().size[1]
 
 signal start_3d_scene
 
@@ -37,6 +37,7 @@ func on_resize():
 func _ready():
 	_on_ButtonI_pressed() # This resets the preview/tile type to the default I-tile
 	get_tree().get_root().connect("size_changed", self, "on_resize")
+	on_resize()
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
