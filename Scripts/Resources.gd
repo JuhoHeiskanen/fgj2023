@@ -4,6 +4,8 @@ export var water: float = 0
 export var calcium: float = 0
 export var iron: float = 0
 
+signal resources_updated
+
 func add_water(amount: float):
 	water += amount
 	print_resources()
@@ -13,6 +15,8 @@ func add_calcium(amount: float):
 func add_iron(amount: float):
 	iron += amount
 	print_resources()
+
 func print_resources():
 	# print("W: ", water, ", C: ", calcium, ", I: ", iron)
+	emit_signal("resources_updated")
 	pass
