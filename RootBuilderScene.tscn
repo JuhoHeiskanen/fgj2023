@@ -37,7 +37,12 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
-"speed": 3.0
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 1 ) ],
+"loop": true,
+"name": "offset",
+"speed": 5.0
 } ]
 
 [sub_resource type="StreamTexture" id=4]
@@ -45,6 +50,7 @@ flags = 4
 load_path = "res://.import/hetero_tile.png-dcf37eb6acf5b4600efac15e0231a236.stex"
 
 [sub_resource type="StreamTexture" id=5]
+flags = 4
 load_path = "res://.import/upgrd_down.png-811c9b441ab1f7d14ca217db6b565323.stex"
 
 [node name="RootBuilderScene" type="Node2D"]
@@ -63,6 +69,7 @@ expand = true
 [node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 581, -195 )
 frames = ExtResource( 20 )
+frame = 1
 playing = true
 script = ExtResource( 10 )
 
@@ -97,8 +104,9 @@ offset = Vector2( 464, 19 )
 flip_h = true
 
 [node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
-position = Vector2( 427, -151 )
+position = Vector2( 520, -151 )
 frames = SubResource( 3 )
+animation = "offset"
 playing = true
 offset = Vector2( 464, 19 )
 
