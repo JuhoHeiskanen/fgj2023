@@ -2,9 +2,13 @@ extends StaticBody
 
 var erected = false
 var resource_kind: int
+var hp: int = 0
 
 func hurt(damage: int):
 	if erected:
+		hp -= damage
+		if hp <= 0:
+			visible = false
 		return
 
 	$Shroom.visible = true
