@@ -20,6 +20,7 @@ hp = 2000
 melee_range = 2.0
 melee_damage = 1000
 attack_windup = 3.0
+goes_after_resource_spawners = false
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 path_desired_distance = 0.5
