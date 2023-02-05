@@ -3,6 +3,7 @@ extends Node
 const builder_prefab: PackedScene = preload("res://RootBuilderScene.tscn")
 const scene3d_prefab: PackedScene = preload("res://MainScene3D.tscn")
 const menu_prefab: PackedScene = preload("res://Menu.tscn")
+const win_prefab: PackedScene = preload("res://WinScene.tscn")
 
 var builder_scene = null
 var scene3d = null
@@ -18,6 +19,7 @@ func _ready():
 	self.add_child(menu)
 	
 	builder_scene = builder_prefab.instance()
+	var shroom = builder_scene.get_node("LevelContainer/Shroom").connect("restart", self, "show_win_screen")
 	builder_scene.connect("start_3d_scene", self, "show_3d_scene")
 
 func _process(_delta: float):
@@ -59,3 +61,16 @@ func show_3d_scene(data):
 	var player = scene3d.get_node("Player")
 	player.connect("back_to_builder", self, "show_builder_scene")
 	self.add_child(scene3d)
+	
+func show_win_screen():
+	if menu:
+		self.remove_child(menu)
+	if builder_scene:
+		self.remove_child(builder_scene)
+	
+	var win = win_prefab.instance()
+	var button = win.get_node("Button").connect("button_up", self, "restart")
+	self.add_child(win)
+
+func restart():
+	get_tree().reload_current_scene()

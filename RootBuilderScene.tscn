@@ -18,7 +18,6 @@
 [ext_resource path="res://Resources/3d_sprites/water.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/ResourceHUD.gd" type="Script" id=17]
 [ext_resource path="res://Resources/3d_sprites/upgrd_up.png" type="Texture" id=18]
-[ext_resource path="res://Resources/3d_sprites/upgrd_down.png" type="Texture" id=19]
 [ext_resource path="res://Resources/shrooms/Shroom1Frames.tres" type="SpriteFrames" id=20]
 [ext_resource path="res://Scripts/UpgradeButton.gd" type="Script" id=21]
 [ext_resource path="res://Resources/mettä_combined.png" type="Texture" id=22]
@@ -45,6 +44,9 @@ animations = [ {
 flags = 4
 load_path = "res://.import/hetero_tile.png-dcf37eb6acf5b4600efac15e0231a236.stex"
 
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/upgrd_down.png-811c9b441ab1f7d14ca217db6b565323.stex"
+
 [node name="RootBuilderScene" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -61,7 +63,6 @@ expand = true
 [node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 581, -195 )
 frames = ExtResource( 20 )
-frame = 1
 playing = true
 script = ExtResource( 10 )
 
@@ -91,7 +92,6 @@ script = ExtResource( 3 )
 [node name="Birb" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( -323, -150 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 flip_h = true
@@ -99,7 +99,6 @@ flip_h = true
 [node name="Birb2" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 427, -151 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 offset = Vector2( 464, 19 )
 
@@ -216,7 +215,7 @@ margin_top = -32.0
 margin_bottom = 32.0
 rect_scale = Vector2( 2, 2 )
 texture_normal = ExtResource( 18 )
-texture_pressed = ExtResource( 19 )
+texture_pressed = SubResource( 5 )
 script = ExtResource( 21 )
 
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
