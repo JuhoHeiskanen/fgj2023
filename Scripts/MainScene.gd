@@ -2,13 +2,20 @@ extends Node
 
 const builder_prefab: PackedScene = preload("res://RootBuilderScene.tscn")
 const scene3d_prefab: PackedScene = preload("res://MainScene3D.tscn")
+const menu_prefab: PackedScene = preload("res://Menu.tscn")
 
 var builder_scene = null
 var scene3d = null
 
+var menu = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	show_builder_scene()
+	menu = menu_prefab.instance()
+	var play = menu.get_node("Button").connect("button_up", self, "show_builder_scene")
+	self.add_child(menu)
+	
+	builder_scene = builder_prefab.instance()
 	builder_scene.connect("start_3d_scene", self, "show_3d_scene")
 
 func show_builder_scene():
@@ -18,9 +25,6 @@ func show_builder_scene():
 		self.remove_child(scene3d)
 		scene3d.queue_free()
 		scene3d = null
-		
-	if builder_scene == null:
-		builder_scene = builder_prefab.instance()
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	self.add_child(builder_scene)
