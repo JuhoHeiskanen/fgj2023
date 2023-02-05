@@ -19,6 +19,10 @@ func _ready():
 	builder_scene.connect("start_3d_scene", self, "show_3d_scene")
 
 func show_builder_scene():
+	if menu:
+		self.remove_child(menu)
+		menu.queue_free()
+
 	if scene3d:
 		var generator = scene3d.get_node("RoomsGenerator")
 		generator.clear_navmesh()
