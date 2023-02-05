@@ -31,6 +31,7 @@ func on_resize():
 	var scaleY = viewport_size[1] / referenceHeight
 	level_container.scale.x = scaleX
 	level_container.scale.y = scaleY
+	level_container.position.y = min(level_container.position.y, get_viewport_rect().size[1] / 2);
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -86,7 +87,7 @@ func handle_mouse_scroll(event: InputEventMouseButton):
 	if event.pressed && event.button_index == BUTTON_WHEEL_DOWN:
 		container.position.y -= 16;
 	if event.pressed && event.button_index == BUTTON_WHEEL_UP:
-		container.position.y = min(container.position.y + 16, 384);
+		container.position.y = min(container.position.y + 16, get_viewport_rect().size[1] / 2);
 
 func handle_left_click(event: InputEventMouseButton):
 	if event.pressed && event.button_index == BUTTON_LEFT:

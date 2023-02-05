@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Resources/3d_sprites/upgrd_down.png" type="Texture" id=19]
 [ext_resource path="res://Resources/shrooms/Shroom1Frames.tres" type="SpriteFrames" id=20]
 [ext_resource path="res://Scripts/UpgradeButton.gd" type="Script" id=21]
+[ext_resource path="res://Resources/mettä_combined.png" type="Texture" id=22]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -48,6 +49,14 @@ load_path = "res://.import/hetero_tile.png-dcf37eb6acf5b4600efac15e0231a236.stex
 script = ExtResource( 2 )
 
 [node name="LevelContainer" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="LevelContainer"]
+anchor_top = -1.0
+anchor_right = 1.0
+margin_top = -500.0
+margin_right = 1152.0
+texture = ExtResource( 22 )
+expand = true
 
 [node name="Shroom" type="AnimatedSprite" parent="LevelContainer"]
 position = Vector2( 581, -195 )
