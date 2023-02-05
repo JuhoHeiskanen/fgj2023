@@ -10,7 +10,7 @@
 [ext_resource path="res://Resources/3way_tile.png" type="Texture" id=8]
 [ext_resource path="res://Resources/gras_dec.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Shroom.gd" type="Script" id=10]
-[ext_resource path="res://Resources/3d_sprites/hudfiller_pink.png" type="Texture" id=11]
+[ext_resource path="res://Resources/3d_sprites/hudfiller_blue.png" type="Texture" id=11]
 [ext_resource path="res://Resources/l_tile.png" type="Texture" id=12]
 [ext_resource path="res://Resources/4way_tile.png" type="Texture" id=13]
 [ext_resource path="res://Resources/3d_sprites/iron.png" type="Texture" id=14]
@@ -137,7 +137,7 @@ margin_bottom = 128.0
 texture_normal = ExtResource( 12 )
 
 [node name="Calc" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonL"]
-rect_scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.75, 0.75 )
 texture_normal = ExtResource( 15 )
 
 [node name="ButtonT" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
@@ -147,7 +147,7 @@ margin_bottom = 128.0
 texture_normal = ExtResource( 8 )
 
 [node name="Water" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonT"]
-rect_scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.75, 0.75 )
 texture_normal = ExtResource( 16 )
 
 [node name="ButtonX" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
@@ -157,7 +157,7 @@ margin_bottom = 128.0
 texture_normal = ExtResource( 13 )
 
 [node name="Iron" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonX"]
-rect_scale = Vector2( 0.5, 0.5 )
+rect_scale = Vector2( 0.75, 0.75 )
 texture_normal = ExtResource( 14 )
 
 [node name="Resources" type="HBoxContainer" parent="Hud/Hudfiller"]
@@ -177,7 +177,7 @@ texture_normal = ExtResource( 14 )
 [node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Iron"]
 margin_right = 40.0
 margin_bottom = 14.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.6, 0.666667, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.0901961, 0.0980392, 0, 1 )
 text = "0"
 
@@ -190,6 +190,7 @@ texture_normal = ExtResource( 15 )
 [node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Calc"]
 margin_right = 40.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0.6, 0.666667, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.0901961, 0.0980392, 0, 1 )
 text = "0"
 
@@ -202,12 +203,15 @@ texture_normal = ExtResource( 16 )
 [node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Water"]
 margin_right = 40.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0.6, 0.666667, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.0901961, 0.0980392, 0, 1 )
 text = "0"
 
 [node name="UpgradeButton" type="TextureButton" parent="Hud/Hudfiller"]
-margin_left = 513.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
 margin_top = -32.0
-margin_right = 577.0
 margin_bottom = 32.0
 rect_scale = Vector2( 2, 2 )
 texture_normal = ExtResource( 18 )
