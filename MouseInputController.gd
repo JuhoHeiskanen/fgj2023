@@ -210,7 +210,6 @@ func _on_ButtonX_pressed():
 	highlight_button(buttonX)
 	update_preview_rotation()
 
-
 func highlight_button(button: TextureButton):
 	var color = button.self_modulate
 	var newColor = Color(color.r, color.g, color.b, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Materials/dirt_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://MouseInputController.gd" type="Script" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://Resources/3d_sprites/hudfiller_pink.png" type="Texture" id=11]
 [ext_resource path="res://Resources/l_tile.png" type="Texture" id=12]
 [ext_resource path="res://Resources/4way_tile.png" type="Texture" id=13]
+[ext_resource path="res://Resources/3d_sprites/iron.png" type="Texture" id=14]
+[ext_resource path="res://Resources/3d_sprites/calcium.png" type="Texture" id=15]
+[ext_resource path="res://Resources/3d_sprites/water.png" type="Texture" id=16]
+[ext_resource path="res://Scripts/ResourceHUD.gd" type="Script" id=17]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -130,7 +134,51 @@ margin_right = 524.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 13 )
 
+[node name="Resources" type="HBoxContainer" parent="Hud/Hudfiller"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -300.0
+margin_bottom = 64.0
+alignment = 1
+script = ExtResource( 17 )
+
+[node name="Iron" type="TextureButton" parent="Hud/Hudfiller/Resources"]
+margin_left = 50.0
+margin_right = 114.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Iron"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="Calc" type="TextureButton" parent="Hud/Hudfiller/Resources"]
+margin_left = 118.0
+margin_right = 182.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Calc"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="Water" type="TextureButton" parent="Hud/Hudfiller/Resources"]
+margin_left = 186.0
+margin_right = 250.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="Hud/Hudfiller/Resources/Water"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "0"
+
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/Resources/Iron" to="." method="_on_ButtonI_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/Resources/Calc" to="." method="_on_ButtonL_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/Resources/Water" to="." method="_on_ButtonT_pressed"]
