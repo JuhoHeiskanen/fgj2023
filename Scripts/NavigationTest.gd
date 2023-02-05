@@ -10,15 +10,17 @@ export var attack_windup: float = 1.0
 var attack_timer: float = 0.0
 export var goes_after_resource_spawners: bool = true
 
+signal dying
+
 onready var player = $"../Player"
 onready var navigation: NavigationAgent = $"NavigationAgent"
 onready var sprite = $"MonsterSprite"
-
 var path = []
 
 func hurt(damage: int):
 	self.hp -= damage
 	if hp <= 0:
+		emit_signal("dying", self.translation)
 		self.get_parent().remove_child(self)
 
 # Called when the node enters the scene tree for the first time.

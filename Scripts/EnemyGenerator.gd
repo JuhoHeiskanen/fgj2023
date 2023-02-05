@@ -28,8 +28,14 @@ func spawn_enemies():
 			enemy = boss_enemy_prefab.instance()
 		enemy.transform.origin = pos
 		enemy.transform.origin.y += 0.5
+		enemy.connect("dying", self, "play_death_sound")
 		parent.call_deferred("add_child", enemy)
 
 func _on_Timer_timeout():
 	if monsters_spawned < monsters_per_spawner:
 		self.spawn_enemies()
+
+func play_death_sound(pos: Vector3):
+	if $Death.playing:
+		$Death.stop()
+	$Death.play()

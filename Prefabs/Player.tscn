@@ -175,7 +175,7 @@ volume_db = -6.0
 
 [node name="FistHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = -6.0
+volume_db = -8.0
 
 [node name="GetHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

@@ -101,11 +101,11 @@ func punch():
 	var space_state = get_world().direct_space_state
 	var look = Vector3.FORWARD.rotated(Vector3.LEFT, -pitch).rotated(Vector3.UP, -yaw)
 	var result = space_state.intersect_ray(self.translation, self.translation + look * melee_distance)
+	$FistHit.play()
 	if result && result.collider:
 		if result.collider.is_in_group("exit"):
 			call_deferred("emit_signal", "back_to_builder")
 		elif result.collider.has_method("hurt"):
-			$FistHit.play()
 			result.collider.hurt(self.attack_damage)
 
 
