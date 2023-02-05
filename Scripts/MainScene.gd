@@ -11,6 +11,8 @@ var menu = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Resources.reset_resources()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	menu = menu_prefab.instance()
 	var play = menu.get_node("Button").connect("button_up", self, "show_builder_scene")
 	self.add_child(menu)

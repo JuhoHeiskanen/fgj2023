@@ -26,6 +26,8 @@ onready var referenceHeight = 640 # get_viewport_rect().size[1]
 signal start_3d_scene
 
 func on_resize():
+	if !is_inside_tree():
+		return
 	var viewport_size = get_viewport_rect().size
 	var scaleX = viewport_size[0] / referenceWidth
 	var scaleY = viewport_size[1] / referenceHeight

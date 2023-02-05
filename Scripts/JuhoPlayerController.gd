@@ -21,6 +21,7 @@ export var walk_delay = .4
 
 onready var attack_animation = $Hud/Center/Attack1
 onready var hurt_animation = $Hud/CanvasLayer/CanvasLayer/Center/Attack1
+onready var dead_display = $Hud/Center2/Youaredead
 
 const fireball_scene: PackedScene = preload("res:///Prefabs/Fireball.tscn")
 
@@ -42,6 +43,13 @@ func hurt(damage: int):
 		dead = true
 		self.eye_height = -0.5
 		$Yaw/Pitch/Camera.transform = $Yaw/Pitch/Camera.transform.rotated(Vector3.FORWARD, PI/2)
+		dead_display.visible = true
+		$DeathTimer.start()
+
+func reset_everything():
+	$"../RoomsGenerator".clear_navmesh()
+	get_tree().reload_current_scene()
+
 
 func update_hp_display():
 	var hp_ratio = float(hp) / float(max_hp) / 2 + 0.25

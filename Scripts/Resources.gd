@@ -1,8 +1,16 @@
 extends Node
 
-export var water: float = 50
-export var calcium: float = 50
-export var iron: float = 50
+export var water: float = 0
+export var calcium: float = 0
+export var iron: float = 0
+
+func reset_resources():
+	water = 1
+	calcium = 1
+	iron = 1
+	
+func _ready():
+	reset_resources()
 
 signal resources_updated
 
