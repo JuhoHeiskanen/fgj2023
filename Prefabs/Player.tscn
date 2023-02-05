@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/JuhoPlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Resources/3d_sprites/hudlifebarbg.png" type="Texture" id=2]
 [ext_resource path="res://Resources/3d_sprites/hudfiller.png" type="Texture" id=3]
 [ext_resource path="res://Resources/3d_sprites/youaredead.png" type="Texture" id=4]
+[ext_resource path="res://Resources/audio/voiei.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Materials/hp_material.tres" type="Material" id=6]
 [ext_resource path="res://Resources/3d_sprites/hudcrosshair.png" type="Texture" id=7]
 [ext_resource path="res://Resources/3d_sprites/pawch_anim.png" type="Texture" id=8]
@@ -11,6 +12,7 @@
 [ext_resource path="res://Resources/audio/slap_fixd.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Resources/audio/strike_fixd.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Resources/audio/walk.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Resources/audio/deathscreem.mp3" type="AudioStream" id=13]
 
 [sub_resource type="CapsuleMesh" id=3]
 radius = 0.5
@@ -191,5 +193,13 @@ pitch_scale = 1.11
 process_mode = 0
 wait_time = 5.0
 one_shot = true
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -5.0
+
+[node name="Pain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -8.0
 
 [connection signal="timeout" from="DeathTimer" to="." method="reset_everything"]

@@ -41,10 +41,14 @@ func hurt(damage: int):
 	self.update_hp_display()
 	if hp <= 0 and !dead:
 		dead = true
+		$Pain.stop()
+		$Death.play()
 		self.eye_height = -0.5
 		$Yaw/Pitch/Camera.transform = $Yaw/Pitch/Camera.transform.rotated(Vector3.FORWARD, PI/2)
 		dead_display.visible = true
 		$DeathTimer.start()
+	elif not dead:
+		$Pain.play()
 
 func reset_everything():
 	$"../RoomsGenerator".clear_navmesh()

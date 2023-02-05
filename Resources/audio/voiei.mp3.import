@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/voiei.mp3-a8dad21865d82dfa59cc76df8ac5690d.mp3str"
+
+[deps]
+
+source_file="res://Resources/audio/voiei.mp3"
+dest_files=[ "res://.import/voiei.mp3-a8dad21865d82dfa59cc76df8ac5690d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
