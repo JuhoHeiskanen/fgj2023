@@ -1,9 +1,9 @@
 extends AnimatedSprite
 
-onready var lvl1Frames: SpriteFrames = load("res://Resources/shrooms/Shroom1Frames.tres")
-onready var lvl2Frames: SpriteFrames = load("res://Resources/shrooms/Shroom2Frames.tres")
-onready var lvl3Frames: SpriteFrames = load("res://Resources/shrooms/Shroom3Frames.tres")
-onready var lvl4Frames: SpriteFrames = load("res://Resources/shrooms/Shroom4Frames.tres")
+onready var lvl1Frames: SpriteFrames = preload("res://Resources/shrooms/Shroom1Frames.tres")
+onready var lvl2Frames: SpriteFrames = preload("res://Resources/shrooms/Shroom2Frames.tres")
+onready var lvl3Frames: SpriteFrames = preload("res://Resources/shrooms/Shroom3Frames.tres")
+onready var lvl4Frames: SpriteFrames = preload("res://Resources/shrooms/Shroom4Frames.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

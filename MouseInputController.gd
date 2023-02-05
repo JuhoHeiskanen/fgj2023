@@ -6,10 +6,10 @@ enum ROTATION {ROT_0, ROT_90, ROT_180, ROT_270}
 var active_tile = TILE.I
 var tile_rotation = ROTATION.ROT_0;
 
-var TILE_TEXTURE_I = load("res://Resources/hetero_tile.png")
-var TILE_TEXTURE_L = load("res://Resources/l_tile.png")
-var TILE_TEXTURE_T = load("res://Resources/3way_tile.png")
-var TILE_TEXTURE_X = load("res://Resources/4way_tile.png")
+var TILE_TEXTURE_I = preload("res://Resources/hetero_tile.png")
+var TILE_TEXTURE_L = preload("res://Resources/l_tile.png")
+var TILE_TEXTURE_T = preload("res://Resources/3way_tile.png")
+var TILE_TEXTURE_X = preload("res://Resources/4way_tile.png")
 
 onready var level_container = $LevelContainer
 onready var tilemap = $LevelContainer/TileMap

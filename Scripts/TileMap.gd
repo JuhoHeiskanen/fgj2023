@@ -8,9 +8,9 @@ const RESOURCE_WATER = 4
 const GENERATION_RANGE_X = 10
 const GENERATION_RANGE_Y = 15
 
-var RES_TEXTURE_WATER = load("res://Resources/3d_sprites/water.png")
-var RES_TEXTURE_IRON = load("res://Resources/3d_sprites/iron.png")
-var RES_TEXTURE_CALC = load("res://Resources/3d_sprites/calcium.png")
+var RES_TEXTURE_WATER = preload("res://Resources/3d_sprites/water.png")
+var RES_TEXTURE_IRON = preload("res://Resources/3d_sprites/iron.png")
+var RES_TEXTURE_CALC = preload("res://Resources/3d_sprites/calcium.png")
 
 var resource_map = [];
 
