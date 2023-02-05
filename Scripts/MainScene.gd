@@ -22,6 +22,7 @@ func show_builder_scene():
 	if menu:
 		self.remove_child(menu)
 		menu.queue_free()
+		menu = null
 
 	if scene3d:
 		var generator = scene3d.get_node("RoomsGenerator")
