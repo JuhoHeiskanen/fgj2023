@@ -1,0 +1,74 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: fgj23
+  namespace:
+spec:
+  routes:
+    - kind: Rule
+      match: "Host(`paraspeli.fi`)"
+      priority: 20
+      services:
+        - name: fgj
+          namespace:
+          port: 80
+  tls:
+    certResolver: le
+    domains:
+      - main: "paraspeli.fi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fgj23
+  namespace:
+  labels:
+    app: fgj23
+spec:
+  ports:
+    - name: http
+      targetPort: 80
+      port: 80
+  selector:
+    app: fgj23
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fgj23
+  namespace:
+  labels:
+    app: fgj23
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: fgj23
+  template:
+    metadata:
+      labels:
+        app: fgj23
+    spec:
+      containers:
+        - image: "registry.juho.space/fgj23:latest"
+          imagePullPolicy: Always
+          name: app
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Always
