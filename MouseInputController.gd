@@ -167,9 +167,13 @@ func place_cell(tile_pos: Vector2):
 
 	# Check cell price
 	match int(active_tile / Globals.TILE_INDEX_OFFSET):
-		TILE.I:
+		TILE.X:
 			# No price
 			valid = valid &&  true
+		TILE.I:
+			valid = Resources.iron >= 1 && valid
+			if valid:
+				Resources.sub_iron(1)
 		TILE.L:
 			valid = Resources.calcium >= 1 && valid
 			if valid:
@@ -178,10 +182,6 @@ func place_cell(tile_pos: Vector2):
 			valid = Resources.water >= 1 && valid
 			if valid:
 				Resources.sub_water(1)
-		TILE.L:
-			valid = Resources.iron >= 1 && valid
-			if valid:
-				Resources.sub_iron(1)
 
 	if valid:
 		tilemap.set_cellv(tile_pos, active_tile + tile_rotation)

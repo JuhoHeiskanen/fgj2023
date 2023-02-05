@@ -130,6 +130,11 @@ margin_right = 128.0
 margin_bottom = 128.0
 texture_normal = SubResource( 4 )
 
+[node name="Iron" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonI"]
+margin_bottom = 64.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture_normal = ExtResource( 14 )
+
 [node name="ButtonL" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer"]
 margin_left = 132.0
 margin_right = 260.0
@@ -155,10 +160,6 @@ margin_left = 396.0
 margin_right = 524.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 13 )
-
-[node name="Iron" type="TextureButton" parent="Hud/Hudfiller/HBoxContainer/ButtonX"]
-rect_scale = Vector2( 0.75, 0.75 )
-texture_normal = ExtResource( 14 )
 
 [node name="Resources" type="HBoxContainer" parent="Hud/Hudfiller"]
 anchor_left = 1.0
@@ -219,12 +220,12 @@ texture_pressed = ExtResource( 19 )
 script = ExtResource( 21 )
 
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI" to="." method="_on_ButtonI_pressed"]
+[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonI/Iron" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL" to="." method="_on_ButtonL_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonL/Calc" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonT" to="." method="_on_ButtonT_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonT/Water" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonX" to="." method="_on_ButtonX_pressed"]
-[connection signal="pressed" from="Hud/Hudfiller/HBoxContainer/ButtonX/Iron" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/Resources/Iron" to="." method="_on_ButtonI_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/Resources/Calc" to="." method="_on_ButtonL_pressed"]
 [connection signal="pressed" from="Hud/Hudfiller/Resources/Water" to="." method="_on_ButtonT_pressed"]
