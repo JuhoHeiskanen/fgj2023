@@ -169,15 +169,15 @@ func place_cell(tile_pos: Vector2):
 		TILE.L:
 			valid = Resources.calcium >= 1 && valid
 			if valid:
-				Resources.calcium =- 1
+				Resources.sub_calcium(1)
 		TILE.T:
 			valid = Resources.water >= 1 && valid
 			if valid:
-				Resources.water =- 1
+				Resources.sub_water(1)
 		TILE.L:
 			valid = Resources.iron >= 1 && valid
 			if valid:
-				Resources.iron =- 1
+				Resources.sub_iron(1)
 
 	if valid:
 		tilemap.set_cellv(tile_pos, active_tile + tile_rotation)
