@@ -13,6 +13,8 @@ material = SubResource( 1 )
 size = Vector2( 4, 3 )
 
 [node name="ExitWall" type="KinematicBody" groups=["exit"]]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 1.5, -2.5 )
