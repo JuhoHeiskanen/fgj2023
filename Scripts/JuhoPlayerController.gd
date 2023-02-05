@@ -139,14 +139,14 @@ func _physics_process(delta: float) -> void:
 			self.walk_cooldown += self.walk_delay
 	move = move.normalized().rotated(Vector3.UP, -yaw)
 	
-	if Input.is_action_pressed("sprint"):
-		move = move * 4
+	#if Input.is_action_pressed("sprint"):
+		#move = move * 4
 	self.vel.x = move.x * walk_speed
 	self.vel.z = move.z * walk_speed
 	self.vel.y -= gravity * delta
 
-	if Input.is_action_just_pressed("jump"):
-		self.vel.y = jump_force
+	#if Input.is_action_just_pressed("jump"):
+		#self.vel.y = jump_force
 
 	if Input.is_action_pressed("attack") && attack_cooldown <= 0.0:
 		self.punch()
